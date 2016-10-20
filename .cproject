@@ -50,13 +50,20 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="CFPMM.null.1485362486" name="CFPMM"/>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Default">
 			<resource resourceType="PROJECT" workspacePath="/CFPMM"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.816825096;cdt.managedbuild.toolchain.gnu.base.816825096.1878327924;cdt.managedbuild.tool.gnu.c.compiler.base.718082087;cdt.managedbuild.tool.gnu.c.compiler.input.320815862">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.816825096;cdt.managedbuild.toolchain.gnu.base.816825096.1878327924;cdt.managedbuild.tool.gnu.cpp.compiler.base.639321137;cdt.managedbuild.tool.gnu.cpp.compiler.input.300564730">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

@@ -6,10 +6,13 @@
 // Description : Hello World in C, Ansi-style
 //============================================================================
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "InstanceGenerator.h"
 
 int main(void) {
-	puts("Hello World!!!");
-	return EXIT_SUCCESS;
+
+	using namespace cfpmm;
+
+	InstanceGenerator::generate(10, 10, true);
+
+	return 0;
 }
