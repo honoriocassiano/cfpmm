@@ -10,8 +10,8 @@ file(GLOB_RECURSE SOURCE_FILES
     "src/*.c"
 )
 
-add_executable(CFPMM ${SOURCE_FILES})
+add_executable(cfpmm ${SOURCE_FILES})
 
 # set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
-target_link_libraries(CFPMM)
+target_link_libraries(cfpmm)

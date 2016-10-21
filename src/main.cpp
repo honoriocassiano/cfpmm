@@ -12,7 +12,7 @@ int main(void) {
 
 	using namespace cfpmm;
 
-	InstanceGenerator::generate(10, 10, true);
+	InstanceGenerator::generate(10, 10, correlation::WEAK, true);
 
 	return 0;
 }
