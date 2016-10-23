@@ -30,7 +30,7 @@ InstanceGenerator::~InstanceGenerator() {
 }
 
 void InstanceGenerator::generate(std::size_t nItems, std::size_t nKnacksacks,
-		correlation correlated, bool similar) {
+		correlation correlated, bool similar, bool save) {
 
 #define RAND(MIN, MAX, GEN) (uniform_int_distribution<int>(MIN, MAX)(GEN))
 
@@ -42,7 +42,7 @@ void InstanceGenerator::generate(std::size_t nItems, std::size_t nKnacksacks,
 			chrono::system_clock::now().time_since_epoch().count());
 
 	vector<int> weights;
-	vector<int> prices;
+	vector<int> profits;
 	vector<int> capacities;
 
 	// TODO Check this implementation
@@ -54,7 +54,7 @@ void InstanceGenerator::generate(std::size_t nItems, std::size_t nKnacksacks,
 
 			// Knacksack Problems - page 185
 			weights.push_back(distribution(generator));
-			prices.push_back(distribution(generator));
+			profits.push_back(distribution(generator));
 		}
 	} else if (correlated == c::WEAK) {
 
@@ -65,7 +65,7 @@ void InstanceGenerator::generate(std::size_t nItems, std::size_t nKnacksacks,
 
 			// Knacksack Problems - page 185
 			weights.push_back(distribution(generator));
-			prices.push_back(RAND(wi - 100, wi + 100, generator));
+			profits.push_back(RAND(wi - 100, wi + 100, generator));
 		}
 	} else if (correlated == c::STRONG) {
 
@@ -77,7 +77,7 @@ void InstanceGenerator::generate(std::size_t nItems, std::size_t nKnacksacks,
 
 			// Knacksack Problems - page 186
 			weights.push_back(wi);
-			prices.push_back(wi + 100);
+			profits.push_back(wi + 100);
 		}
 	}
 
@@ -118,15 +118,17 @@ void InstanceGenerator::generate(std::size_t nItems, std::size_t nKnacksacks,
 		capacities.push_back(lastCapacity);
 	}
 
-	saveToFile("instance.txt", nItems, nKnacksacks, weights, prices,
-			capacities);
+	if (save) {
+		saveToFile("instance.txt", nItems, nKnacksacks, weights, profits,
+				capacities);
+	}
 
 #undef RAND
 }
 
 bool InstanceGenerator::saveToFile(const string& filename, size_t nItems,
 		size_t nKnacksacks, const vector<int>& weigths,
-		const vector<int>& prices, const vector<int>& capacities) {
+		const vector<int>& profits, const vector<int>& capacities) {
 
 	ofstream file(filename.c_str());
 
@@ -142,7 +144,7 @@ bool InstanceGenerator::saveToFile(const string& filename, size_t nItems,
 	}
 	file << "\n";
 
-	for (const auto& p : prices) {
+	for (const auto& p : profits) {
 		file << p << " ";
 	}
 	file << "\n";
