@@ -41,9 +41,9 @@ void InstanceGenerator::generate(std::size_t nItems, std::size_t nKnacksacks,
 	default_random_engine generator(
 			chrono::system_clock::now().time_since_epoch().count());
 
-	vector<int> weights(nItems);
-	vector<int> prices(nItems);
-	vector<int> capacities(nKnacksacks);
+	vector<int> weights;
+	vector<int> prices;
+	vector<int> capacities;
 
 	// TODO Check this implementation
 	if (correlated == c::NONE) {
@@ -118,6 +118,9 @@ void InstanceGenerator::generate(std::size_t nItems, std::size_t nKnacksacks,
 		capacities.push_back(lastCapacity);
 	}
 
+	saveToFile("instance.txt", nItems, nKnacksacks, weights, prices,
+			capacities);
+
 #undef RAND
 }
 
@@ -137,10 +140,12 @@ bool InstanceGenerator::saveToFile(const string& filename, size_t nItems,
 	for (const auto& w : weigths) {
 		file << w << " ";
 	}
+	file << "\n";
 
 	for (const auto& p : prices) {
 		file << p << " ";
 	}
+	file << "\n";
 
 	for (const auto& c : capacities) {
 		file << c << " ";
