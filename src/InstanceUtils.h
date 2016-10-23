@@ -5,8 +5,8 @@
  *      Author: aluno
  */
 
-#ifndef INSTANCEGENERATOR_H_
-#define INSTANCEGENERATOR_H_
+#ifndef INSTANCEUTILS_H_
+#define INSTANCEUTILS_H_
 
 #include <cstddef>
 #include <vector>
@@ -26,10 +26,9 @@ enum class correlation {
 /**
  * Class that generate and save instances of multiple knacksacks problem
  */
-class InstanceGenerator {
+class InstanceUtils {
 public:
-	InstanceGenerator();
-	virtual ~InstanceGenerator();
+	virtual ~InstanceUtils();
 
 	/**
 	 * Generate an instance of a problem.
@@ -56,8 +55,9 @@ public:
 	static bool saveToFile(const std::string& filename, std::size_t nItems,
 			std::size_t nKnacksacks, const std::vector<int>& weigths,
 			const std::vector<int>& profits, const std::vector<int>& capacities);
+
 };
 
 } /* namespace cfpmm */
 
-#endif /* INSTANCEGENERATOR_H_ */
+#endif /* INSTANCEUTILS_H_ */

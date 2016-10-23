@@ -5,7 +5,7 @@
  *      Author: aluno
  */
 
-#include "InstanceGenerator.h"
+#include "InstanceUtils.h"
 
 #include <cstdlib>
 #include <vector>
@@ -21,15 +21,11 @@ constexpr auto UNIFORM_MAX = 1000;
 
 using namespace std;
 
-InstanceGenerator::InstanceGenerator() {
+InstanceUtils::~InstanceUtils() {
 
 }
 
-InstanceGenerator::~InstanceGenerator() {
-
-}
-
-void InstanceGenerator::generate(std::size_t nItems, std::size_t nKnacksacks,
+void InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 		correlation correlated, bool similar, bool save) {
 
 #define RAND(MIN, MAX, GEN) (uniform_int_distribution<int>(MIN, MAX)(GEN))
@@ -126,7 +122,7 @@ void InstanceGenerator::generate(std::size_t nItems, std::size_t nKnacksacks,
 #undef RAND
 }
 
-bool InstanceGenerator::saveToFile(const string& filename, size_t nItems,
+bool InstanceUtils::saveToFile(const string& filename, size_t nItems,
 		size_t nKnacksacks, const vector<int>& weigths,
 		const vector<int>& profits, const vector<int>& capacities) {
 

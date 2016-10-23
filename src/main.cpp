@@ -6,13 +6,13 @@
 // Description : Hello World in C, Ansi-style
 //============================================================================
 
-#include "InstanceGenerator.h"
+#include "InstanceUtils.h"
 
 int main(void) {
 
 	using namespace cfpmm;
 
-	InstanceGenerator::generate(10, 5, correlation::WEAK, true);
+	InstanceUtils::generate(10, 5, correlation::WEAK, true);
 
 	return 0;
 }
