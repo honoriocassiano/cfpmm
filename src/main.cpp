@@ -35,7 +35,6 @@ int main(void) {
 //
 //	 s = _s;
 
-
 	Ant* ant = new Ant(instance);
 
 	auto solution = ant->getSolution();

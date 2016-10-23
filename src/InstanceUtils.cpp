@@ -27,7 +27,7 @@ InstanceUtils::~InstanceUtils() {
 
 }
 
-void InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
+Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 		correlation correlated, bool similar, bool save) {
 
 #define RAND(MIN, MAX, GEN) (uniform_int_distribution<int>(MIN, MAX)(GEN))
@@ -131,6 +131,8 @@ void InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 	}
 
 #undef RAND
+
+	return new Instance(nItems, nKnacksacks, items, capacities);
 }
 
 bool InstanceUtils::saveToFile(const string& filename, size_t nItems,

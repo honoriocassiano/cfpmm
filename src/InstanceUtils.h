@@ -42,7 +42,7 @@ public:
 	 * @param similar flag that indicate if knacksacks capacities must be similar or not
 	 * @param save flag that indicate if the generated instance must be save in a file
 	 */
-	static void generate(std::size_t nItems, std::size_t nKnacksacks,
+	static Instance* generate(std::size_t nItems, std::size_t nKnacksacks,
 			correlation correlated, bool similar, bool save = true);
 
 	/**
