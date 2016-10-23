@@ -19,7 +19,17 @@ Solution::~Solution() {
 
 }
 
+std::ostream& operator<<(std::ostream& os, const Solution& solution) {
+	for(auto& i : solution.solution) {
+		os << i << " ";
+	}
+
+	return os;
+}
+
+void Solution::clear() {
+}
+
 } /* namespace cfpmm */
 
-void cfpmm::Solution::clear() {
-}
+

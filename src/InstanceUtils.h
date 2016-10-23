@@ -60,6 +60,8 @@ public:
 			std::size_t nKnacksacks, const std::vector<int>& capacities,
 			const std::vector<Item>& items);
 
+	static bool isValidSolution(const Solution& solution);
+
 	static Solution* generateInitialSolution(const Instance& instance);
 };
 

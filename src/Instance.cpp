@@ -10,10 +10,9 @@
 namespace cfpmm {
 
 Instance::Instance(std::size_t _nItems, std::size_t _nKnacksacks,
-		const std::vector<int>& _weigths, const std::vector<int>& _profits,
+		const std::vector<Item>& _items,
 		const std::vector<int>& _capacities) :
-		nItems(_nItems), nKnacksacks(_nKnacksacks), weigths(_weigths), profits(
-				_profits), capacities(_capacities) {
+		nItems(_nItems), nKnacksacks(_nKnacksacks), items(_items), capacities(_capacities) {
 
 }
 

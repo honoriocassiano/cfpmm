@@ -11,6 +11,7 @@
 #include <vector>
 #include <random>
 #include <chrono>
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 
@@ -126,8 +127,7 @@ void InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 	}
 
 	if (save) {
-		saveToFile("instance.txt", nItems, nKnacksacks,
-				capacities, items);
+		saveToFile("instance.txt", nItems, nKnacksacks, capacities, items);
 	}
 
 #undef RAND
@@ -157,6 +157,36 @@ bool InstanceUtils::saveToFile(const string& filename, size_t nItems,
 	file.close();
 
 	return false;
+}
+
+bool InstanceUtils::isValidSolution(const Solution& _solution) {
+
+	auto& capacities = _solution.getInstance()->getCapacities();
+	auto& items = _solution.getInstance()->getItems();
+	auto& solution = _solution.getSolution();
+
+	int totalWeights[capacities.size()];
+
+	std::fill(totalWeights, totalWeights + capacities.size(), 0);
+
+	for (int i = 0; i < solution.size(); i++) {
+		if (solution[i] >= 0) {
+			totalWeights[solution[i]] += items[i].weight();
+		}
+	}
+
+	for(auto& c : totalWeights) {
+		std::cout << c << " ";
+	}
+	std::cout << "\n";
+
+	for (int i = 0; i < capacities.size(); i++) {
+		if (totalWeights[i] > capacities[i]) {
+			return false;
+		}
+	}
+
+	return true;
 }
 
 Solution* InstanceUtils::generateInitialSolution(const Instance& instance) {
