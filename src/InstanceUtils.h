@@ -41,6 +41,8 @@ public:
 	 * @param correlated type of correlation between profits and weights of the items
 	 * @param similar flag that indicate if knacksacks capacities must be similar or not
 	 * @param save flag that indicate if the generated instance must be save in a file
+	 *
+	 * @return New instance of problem
 	 */
 	static Instance* generate(std::size_t nItems, std::size_t nKnacksacks,
 			correlation correlated, bool similar, bool save = true);
@@ -60,11 +62,22 @@ public:
 			std::size_t nKnacksacks, const std::vector<int>& capacities,
 			const std::vector<Item>& items);
 
+	/**
+	 * Reads a instance from a file
+	 * @param filename name of file
+	 *
+	 * return The instance of problem or null if an error occured
+	 */
 	static Instance* readFromFile(const std::string& filename);
 
+	/**
+	 * Check if a solution is valid
+	 *
+	 * @param solution Solution to be checked
+	 *
+	 * @return true if is valid or false if not
+	 */
 	static bool isValidSolution(const Solution& solution);
-
-	static Solution* generateInitialSolution(const Instance& instance);
 };
 
 } /* namespace cfpmm */

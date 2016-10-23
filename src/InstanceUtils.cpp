@@ -256,10 +256,5 @@ Instance* InstanceUtils::readFromFile(const std::string& filename) {
 	return new Instance(nItems, nKnacksacks, items, capacities);
 }
 
-Solution* InstanceUtils::generateInitialSolution(const Instance& instance) {
-
-	return nullptr;
-}
-
 } /* namespace cfpmm */
 
