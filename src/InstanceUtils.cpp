@@ -175,10 +175,17 @@ bool InstanceUtils::isValidSolution(const Solution& _solution) {
 		}
 	}
 
-	for(auto& c : totalWeights) {
+	std::cout << "*********************************************\n";
+	for (auto& c : capacities) {
 		std::cout << c << " ";
 	}
 	std::cout << "\n";
+
+	for (auto& c : totalWeights) {
+		std::cout << c << " ";
+	}
+	std::cout << "\n";
+	std::cout << "*********************************************\n";
 
 	for (int i = 0; i < capacities.size(); i++) {
 		if (totalWeights[i] > capacities[i]) {

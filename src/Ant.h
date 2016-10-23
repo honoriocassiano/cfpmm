@@ -18,6 +18,11 @@ public:
 	Ant(Instance* instance);
 	virtual ~Ant();
 
+	const Solution& getSolution() const {
+		return solution;
+	}
+
+private:
 	void generateInitialSolution();
 
 private:
