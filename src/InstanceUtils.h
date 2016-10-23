@@ -12,6 +12,10 @@
 #include <vector>
 #include <string>
 
+#include "Instance.h"
+#include "Solution.h"
+#include "Item.h"
+
 namespace cfpmm {
 
 /**
@@ -53,9 +57,10 @@ public:
 	 * @return true if file was saved and false if an error occurred
 	 */
 	static bool saveToFile(const std::string& filename, std::size_t nItems,
-			std::size_t nKnacksacks, const std::vector<int>& weigths,
-			const std::vector<int>& profits, const std::vector<int>& capacities);
+			std::size_t nKnacksacks, const std::vector<int>& capacities,
+			const std::vector<Item>& items);
 
+	static Solution* generateInitialSolution(const Instance& instance);
 };
 
 } /* namespace cfpmm */

@@ -16,7 +16,8 @@
 
 namespace cfpmm {
 
-constexpr auto UNIFORM_MIN = 10;
+// TODO Check this value
+constexpr auto UNIFORM_MIN = 100;
 constexpr auto UNIFORM_MAX = 1000;
 
 using namespace std;
@@ -37,9 +38,11 @@ void InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 	default_random_engine generator(
 			chrono::system_clock::now().time_since_epoch().count());
 
-	vector<int> weights;
-	vector<int> profits;
+//	vector<int> weights;
+//	vector<int> profits;
 	vector<int> capacities;
+
+	vector<Item> items;
 
 	// TODO Check this implementation
 	if (correlated == c::NONE) {
@@ -49,38 +52,37 @@ void InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 		for (int i = 0; i < nItems; i++) {
 
 			// Knacksack Problems - page 185
-			weights.push_back(distribution(generator));
-			profits.push_back(distribution(generator));
+			int weight = distribution(generator);
+			int profit = distribution(generator);
+
+			items.push_back(Item(weight, profit));
 		}
 	} else if (correlated == c::WEAK) {
 
 		uid distribution(UNIFORM_MIN, UNIFORM_MAX);
 
 		for (int i = 0; i < nItems; i++) {
-			auto wi = distribution(generator);
-
 			// Knacksack Problems - page 185
-			weights.push_back(distribution(generator));
-			profits.push_back(RAND(wi - 100, wi + 100, generator));
+			int weight = distribution(generator);
+			int profit = RAND(weight - 100, weight + 100, generator);
+
+			items.push_back(Item(weight, profit));
 		}
 	} else if (correlated == c::STRONG) {
 
 		uid distribution(UNIFORM_MIN, UNIFORM_MAX);
 
 		for (int i = 0; i < nItems; i++) {
-
-			auto wi = distribution(generator);
-
 			// Knacksack Problems - page 186
-			weights.push_back(wi);
-			profits.push_back(wi + 100);
+			int weight = distribution(generator);
+			int profit = RAND(weight - 100, weight + 100, generator);
 		}
 	}
 
 	double weightSum = 0.0;
 
 	for (int i = 0; i < nItems; ++i) {
-		weightSum += weights[i];
+		weightSum += items[i].weight();
 	}
 
 	if (similar) {
@@ -90,7 +92,7 @@ void InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 			double ck = 0;
 
 			for (int k = 0; k < i; k++) {
-				ck += capacities[4];
+				ck += capacities[k];
 			}
 
 			uid distribution(UNIFORM_MIN, UNIFORM_MIN + wj - ck);
@@ -115,16 +117,16 @@ void InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 	}
 
 	if (save) {
-		saveToFile("instance.txt", nItems, nKnacksacks, weights, profits,
-				capacities);
+		saveToFile("instance.txt", nItems, nKnacksacks,
+				capacities, items);
 	}
 
 #undef RAND
 }
 
 bool InstanceUtils::saveToFile(const string& filename, size_t nItems,
-		size_t nKnacksacks, const vector<int>& weigths,
-		const vector<int>& profits, const vector<int>& capacities) {
+		size_t nKnacksacks, const vector<int>& capacities,
+		const std::vector<Item>& items) {
 
 	ofstream file(filename.c_str());
 
@@ -135,13 +137,13 @@ bool InstanceUtils::saveToFile(const string& filename, size_t nItems,
 
 	file << nItems << " " << nKnacksacks << "\n";
 
-	for (const auto& w : weigths) {
-		file << w << " ";
+	for (const auto& i : items) {
+		file << i.weight() << " ";
 	}
 	file << "\n";
 
-	for (const auto& p : profits) {
-		file << p << " ";
+	for (const auto& p : items) {
+		file << p.profit() << " ";
 	}
 	file << "\n";
 
@@ -152,6 +154,11 @@ bool InstanceUtils::saveToFile(const string& filename, size_t nItems,
 	file.close();
 
 	return false;
+}
+
+Solution* InstanceUtils::generateInitialSolution(const Instance& instance) {
+
+	return nullptr;
 }
 
 } /* namespace cfpmm */
