@@ -86,9 +86,12 @@ void InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 	}
 
 	if (similar) {
+
+		double wj = 0.5 * weightSum;
+		int lastCapacity = wj;
+
 		for (int i = 0; i < nKnacksacks - 1; i++) {
 
-			double wj = 0.5 * weightSum;
 			double ck = 0;
 
 			for (int k = 0; k < i; k++) {
@@ -97,8 +100,14 @@ void InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 
 			uid distribution(UNIFORM_MIN, UNIFORM_MIN + wj - ck);
 
-			capacities.push_back(distribution(generator));
+			int c = distribution(generator);
+
+			capacities.push_back(c);
+			lastCapacity -= c;
 		}
+
+		capacities.push_back(lastCapacity);
+
 	} else {
 
 		double minBound = 0.4 * weightSum / nKnacksacks;
@@ -138,17 +147,11 @@ bool InstanceUtils::saveToFile(const string& filename, size_t nItems,
 	file << nItems << " " << nKnacksacks << "\n";
 
 	for (const auto& i : items) {
-		file << i.weight() << " ";
+		file << i.weight() << " " << i.profit() << "\n";
 	}
-	file << "\n";
-
-	for (const auto& p : items) {
-		file << p.profit() << " ";
-	}
-	file << "\n";
 
 	for (const auto& c : capacities) {
-		file << c << " ";
+		file << c << "\n";
 	}
 
 	file.close();
