@@ -27,15 +27,14 @@ int main(void) {
 	Instance* instance = new Instance(items.size(), capacities.size(), items,
 			capacities);
 
-	/*
-	 Solution* solution = new Solution(instance);
+//	 Solution* solution = new Solution(instance);
+//
+//	 std::vector<int> _s { -1, -1, -1, 1, -1, -1, -1, -1 };
+//
+//	 auto& s = solution->getSolution();
+//
+//	 s = _s;
 
-	 std::vector<int> _s { -1, -1, -1, 1, -1, -1, -1, -1 };
-
-	 auto& s = solution->getSolution();
-
-	 s = _s;
-	 */
 
 	Ant* ant = new Ant(instance);
 
@@ -43,6 +42,7 @@ int main(void) {
 
 	std::cout << (InstanceUtils::isValidSolution(solution) ? "true" : "false") << "\n";
 	std::cout << solution << std::endl;
+
 
 	return 0;
 }

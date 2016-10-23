@@ -196,6 +196,64 @@ bool InstanceUtils::isValidSolution(const Solution& _solution) {
 	return true;
 }
 
+Instance* InstanceUtils::readFromFile(const std::string& filename) {
+
+	using namespace std;
+
+	FILE* file = fopen(filename.c_str(), "r");
+
+	if (!file) {
+		cerr << "Error opening file!\n";
+		return nullptr;
+	}
+
+	size_t nItems;
+	size_t nKnacksacks;
+
+	std::vector<Item> items;
+	std::vector<int> capacities;
+
+	fscanf(file, "%ld %ld", &nItems, &nKnacksacks);
+	fgetc(file);
+
+	for (int i = 0; i < nItems; ++i) {
+		int weight;
+		int profit;
+
+		int read = fscanf(file, "%d %d", &weight, &profit);
+
+		if (read != 2) {
+			cerr << "Invalid file\n";
+			fclose(file);
+			return nullptr;
+		}
+
+		items.push_back(Item(weight, profit));
+
+		fgetc(file);
+	}
+
+	for (int i = 0; i < nKnacksacks; ++i) {
+		int capacity;
+
+		int read = fscanf(file, "%d", &capacity);
+
+		if (read != 1) {
+			cerr << "Invalid file\n";
+			fclose(file);
+			return nullptr;
+		}
+
+		capacities.push_back(capacity);
+
+		fgetc(file);
+	}
+
+	fclose(file);
+
+	return new Instance(nItems, nKnacksacks, items, capacities);
+}
+
 Solution* InstanceUtils::generateInitialSolution(const Instance& instance) {
 
 	return nullptr;
