@@ -16,13 +16,23 @@ namespace cfpmm {
 
 class Ant;
 
+/**
+ * Class that represent a solution to an instance
+ */
 class Solution {
 public:
+
+	/**
+	 * @param instance Instance of problem
+	 */
 	Solution(Instance* instance);
 	virtual ~Solution();
 
 	void clear();
 
+	/**
+	 * Getter for solution vector
+	 */
 	const std::vector<int>& getSolution() const {
 		return solution;
 	}
@@ -32,6 +42,9 @@ public:
 		return solution;
 	}
 
+	/**
+	 * Getter for instance
+	 */
 	const Instance* getInstance() const {
 		return instance;
 	}

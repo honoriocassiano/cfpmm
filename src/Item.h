@@ -10,20 +10,36 @@
 
 namespace cfpmm {
 
+/**
+ * Class that represent an item
+ */
 class Item {
 public:
+
 	Item(int weight, int profit) :
-		_weight(weight), _profit(profit) {
+			_weight(weight), _profit(profit) {
 	}
 
-	virtual ~Item() {}
+	virtual ~Item() {
+	}
 
-	int weight() const { return _weight; }
-	int profit() const { return _profit; }
+	/**
+	 * Getter for weight
+	 */
+	int weight() const {
+		return _weight;
+	}
+
+	/**
+	 * Getter for profit
+	 */
+	int profit() const {
+		return _profit;
+	}
 
 private:
-	int _weight;
-	int _profit;
+	int _weight; /**< Weight of item */
+	int _profit; /**< Profit of item */
 };
 
 } /* namespace cfpmm */

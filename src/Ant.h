@@ -13,21 +13,36 @@
 
 namespace cfpmm {
 
+/**
+ * Class that represent an ant of a colony
+ */
 class Ant {
 public:
+
+	/**
+	 * Initializer for an ant
+	 * @param instance instance of the problem
+	 */
 	Ant(Instance* instance);
 	virtual ~Ant();
 
+	/**
+	 * Getter for the solution
+	 */
 	const Solution& getSolution() const {
 		return solution;
 	}
 
 private:
+
+	/**
+	 * Generate a initial solution
+	 */
 	void generateInitialSolution();
 
 private:
 
-	Solution solution;
+	Solution solution; /**< Solution carried by ant */
 };
 
 } /* namespace cfpmm */
