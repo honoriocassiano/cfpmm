@@ -18,8 +18,8 @@
 namespace cfpmm {
 
 // TODO Check this value
-constexpr auto UNIFORM_MIN = 100;
-constexpr auto UNIFORM_MAX = 1000;
+constexpr auto MIN = 100;
+constexpr auto MAX = 1000;
 
 using namespace std;
 
@@ -46,7 +46,7 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 	// TODO Check this implementation
 	if (correlated == c::NONE) {
 
-		uid distribution(UNIFORM_MIN, UNIFORM_MAX);
+		uid distribution(MIN, MAX);
 
 		for (int i = 0; i < nItems; i++) {
 
@@ -58,7 +58,7 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 		}
 	} else if (correlated == c::WEAK) {
 
-		uid distribution(UNIFORM_MIN, UNIFORM_MAX);
+		uid distribution(MIN, MAX);
 
 		for (int i = 0; i < nItems; i++) {
 			// Knapsack Problems - page 185
@@ -69,7 +69,7 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 		}
 	} else if (correlated == c::STRONG) {
 
-		uid distribution(UNIFORM_MIN, UNIFORM_MAX);
+		uid distribution(MIN, MAX);
 
 		for (int i = 0; i < nItems; i++) {
 			// Knapsack Problems - page 186
@@ -97,7 +97,7 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 				ck += capacities[k];
 			}
 
-			uid distribution(UNIFORM_MIN, UNIFORM_MIN + wj - ck);
+			uid distribution(MIN, MIN + wj - ck);
 
 			int c = distribution(generator);
 
