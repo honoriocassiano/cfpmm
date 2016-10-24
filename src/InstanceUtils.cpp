@@ -39,8 +39,6 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 	default_random_engine generator(
 			chrono::system_clock::now().time_since_epoch().count());
 
-//	vector<int> weights;
-//	vector<int> profits;
 	vector<int> capacities;
 
 	vector<Item> items;
