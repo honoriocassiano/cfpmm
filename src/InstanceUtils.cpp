@@ -27,7 +27,7 @@ InstanceUtils::~InstanceUtils() {
 
 }
 
-Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
+Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 		correlation correlated, bool similar, bool save) {
 
 #define RAND(MIN, MAX, GEN) (uniform_int_distribution<int>(MIN, MAX)(GEN))
@@ -52,7 +52,7 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 
 		for (int i = 0; i < nItems; i++) {
 
-			// Knacksack Problems - page 185
+			// Knapsack Problems - page 185
 			int weight = distribution(generator);
 			int profit = distribution(generator);
 
@@ -63,7 +63,7 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 		uid distribution(UNIFORM_MIN, UNIFORM_MAX);
 
 		for (int i = 0; i < nItems; i++) {
-			// Knacksack Problems - page 185
+			// Knapsack Problems - page 185
 			int weight = distribution(generator);
 			int profit = RAND(weight - 100, weight + 100, generator);
 
@@ -74,7 +74,7 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 		uid distribution(UNIFORM_MIN, UNIFORM_MAX);
 
 		for (int i = 0; i < nItems; i++) {
-			// Knacksack Problems - page 186
+			// Knapsack Problems - page 186
 			int weight = distribution(generator);
 			int profit = RAND(weight - 100, weight + 100, generator);
 		}
@@ -91,7 +91,7 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 		double wj = 0.5 * weightSum;
 		int lastCapacity = wj;
 
-		for (int i = 0; i < nKnacksacks - 1; i++) {
+		for (int i = 0; i < nKnapsacks - 1; i++) {
 
 			double ck = 0;
 
@@ -111,13 +111,13 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 
 	} else {
 
-		double minBound = 0.4 * weightSum / nKnacksacks;
-		double maxBound = 0.6 * weightSum / nKnacksacks;
+		double minBound = 0.4 * weightSum / nKnapsacks;
+		double maxBound = 0.6 * weightSum / nKnapsacks;
 		double lastCapacity = 0.5 * weightSum;
 
 		uid distribution(minBound, maxBound);
 
-		for (int i = 0; i < nKnacksacks - 1; i++) {
+		for (int i = 0; i < nKnapsacks - 1; i++) {
 			capacities.push_back(distribution(generator));
 
 			lastCapacity -= capacities[i];
@@ -127,16 +127,16 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnacksacks,
 	}
 
 	if (save) {
-		saveToFile("instance.txt", nItems, nKnacksacks, capacities, items);
+		saveToFile("instance.txt", nItems, nKnapsacks, capacities, items);
 	}
 
 #undef RAND
 
-	return new Instance(nItems, nKnacksacks, items, capacities);
+	return new Instance(nItems, nKnapsacks, items, capacities);
 }
 
 bool InstanceUtils::saveToFile(const string& filename, size_t nItems,
-		size_t nKnacksacks, const vector<int>& capacities,
+		size_t nKnapsacks, const vector<int>& capacities,
 		const std::vector<Item>& items) {
 
 	ofstream file(filename.c_str());
@@ -146,7 +146,7 @@ bool InstanceUtils::saveToFile(const string& filename, size_t nItems,
 		return false;
 	}
 
-	file << nItems << " " << nKnacksacks << "\n";
+	file << nItems << " " << nKnapsacks << "\n";
 
 	for (const auto& i : items) {
 		file << i.weight() << " " << i.profit() << "\n";
@@ -210,12 +210,12 @@ Instance* InstanceUtils::readFromFile(const std::string& filename) {
 	}
 
 	size_t nItems;
-	size_t nKnacksacks;
+	size_t nKnapsacks;
 
 	std::vector<Item> items;
 	std::vector<int> capacities;
 
-	fscanf(file, "%ld %ld", &nItems, &nKnacksacks);
+	fscanf(file, "%ld %ld", &nItems, &nKnapsacks);
 	fgetc(file);
 
 	for (int i = 0; i < nItems; ++i) {
@@ -235,7 +235,7 @@ Instance* InstanceUtils::readFromFile(const std::string& filename) {
 		fgetc(file);
 	}
 
-	for (int i = 0; i < nKnacksacks; ++i) {
+	for (int i = 0; i < nKnapsacks; ++i) {
 		int capacity;
 
 		int read = fscanf(file, "%d", &capacity);
@@ -253,7 +253,7 @@ Instance* InstanceUtils::readFromFile(const std::string& filename) {
 
 	fclose(file);
 
-	return new Instance(nItems, nKnacksacks, items, capacities);
+	return new Instance(nItems, nKnapsacks, items, capacities);
 }
 
 } /* namespace cfpmm */

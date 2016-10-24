@@ -20,7 +20,7 @@ class Ant;
 
 class Instance {
 public:
-	Instance(std::size_t nItems, std::size_t nKnacksacks,
+	Instance(std::size_t nItems, std::size_t nKnapsacks,
 			const std::vector<Item>& items, const std::vector<int>& capacities);
 
 	virtual ~Instance();
@@ -35,7 +35,7 @@ public:
 
 private:
 	std::size_t nItems;
-	std::size_t nKnacksacks;
+	std::size_t nKnapsacks;
 	std::vector<Item> items;
 	std::vector<int> capacities;
 
