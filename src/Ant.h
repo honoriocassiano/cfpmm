@@ -23,7 +23,7 @@ public:
 	 * Initializer for an ant
 	 * @param instance instance of the problem
 	 */
-	Ant(Instance* instance);
+	Ant(Instance* instance, std::vector<std::vector<double> >& pheromoneList);
 	virtual ~Ant();
 
 	/**
@@ -39,6 +39,8 @@ private:
 	 * Generate a initial solution
 	 */
 	void generateInitialSolution();
+
+	std::vector<std::vector<double> >& pheromoneList;
 
 private:
 

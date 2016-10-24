@@ -52,9 +52,8 @@ public:
 	 * @param filename name of file that the instance will be saved
 	 * @param nItems number of items
 	 * @param nKnapsacks number of knapsacks
-	 * @param weights list of items weights
-	 * @param profits list of items profits
 	 * @param capacities list of knapsacks capacities
+	 * @param items list of items
 	 *
 	 * @return true if file was saved and false if an error occurred
 	 */

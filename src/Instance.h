@@ -17,6 +17,7 @@ namespace cfpmm {
 
 class Solution;
 class Ant;
+class Colony;
 
 class Instance {
 public:
@@ -41,6 +42,7 @@ private:
 
 	friend class Solution;
 	friend class Ant;
+	friend class Colony;
 };
 
 } /* namespace cfpmm */

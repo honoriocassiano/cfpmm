@@ -14,8 +14,8 @@
 
 namespace cfpmm {
 
-Ant::Ant(Instance* _instance) :
-		solution(_instance) {
+Ant::Ant(Instance* _instance, std::vector<std::vector<double> >& _pheromoneList) :
+		solution(_instance), pheromoneList(_pheromoneList) {
 
 	generateInitialSolution();
 }
@@ -35,7 +35,7 @@ void Ant::generateInitialSolution() {
 
 		for (int k = 0; k < capacities.size(); ++k) {
 
-			if(remainingCapacities[k] >= items[i].weight()) {
+			if (remainingCapacities[k] >= items[i].weight()) {
 				solution[i] = k;
 				remainingCapacities[k] -= items[i].weight();
 
