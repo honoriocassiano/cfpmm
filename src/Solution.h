@@ -30,6 +30,9 @@ public:
 
 	void clear();
 
+	bool isSelected(int item) const;
+	bool isSelected(int item, int knapsack) const;
+
 	/**
 	 * Getter for solution vector
 	 */

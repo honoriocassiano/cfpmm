@@ -19,6 +19,14 @@ Solution::~Solution() {
 
 }
 
+bool Solution::isSelected(int item) const {
+	return solution[item] == -1;
+}
+
+bool Solution::isSelected(int item, int knapsack) const {
+	return solution[item] == knapsack;
+}
+
 std::ostream& operator<<(std::ostream& os, const Solution& solution) {
 	for(auto& i : solution.solution) {
 		os << i << " ";
@@ -31,5 +39,3 @@ void Solution::clear() {
 }
 
 } /* namespace cfpmm */
-
-

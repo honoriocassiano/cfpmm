@@ -33,6 +33,10 @@ public:
 		return solution;
 	}
 
+	long getValue() const {
+		return 0;
+	}
+
 private:
 
 	/**

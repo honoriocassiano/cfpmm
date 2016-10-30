@@ -8,11 +8,19 @@
 #include "Colony.h"
 
 #include <cassert>
+#include <iostream>
 
 namespace cfpmm {
 
-Colony::Colony(Instance* _instance, std::size_t _nAnts) :
-		instance(_instance), nAnts(_nAnts), ants(_nAnts, nullptr) {
+Colony::Colony(Instance* _instance, std::size_t _nAnts, float _evaporationRatio) :
+		instance(_instance), nAnts(_nAnts), ants(_nAnts, nullptr), evaporationRatio(
+				_evaporationRatio) {
+
+	if (evaporationRatio >= 1 || evaporationRatio <= 0) {
+		std::cerr
+				<< "Evaporation ratio must be greater then 0 and less then 1\n";
+		exit(-1);
+	}
 
 	assert(instance != nullptr);
 
@@ -36,6 +44,34 @@ void Colony::initialize() {
 
 	for (int i = 0; i < nAnts; ++i) {
 		ants[i] = new Ant(instance, pheromoneList);
+	}
+}
+
+void Colony::evaporate() {
+	for (auto& l : pheromoneList) {
+		for (auto& f : l) {
+			f *= evaporationRatio;
+		}
+	}
+}
+
+void Colony::reinforce() {
+	Ant* bestAnt = ants[0];
+
+	for (int i = 1; i < ants.size(); ++i) {
+		auto& ant = ants[i];
+
+		if (ant->getValue() > bestAnt->getValue()) {
+			bestAnt = ant;
+		}
+	}
+
+	for (int i = 0; i < instance->nKnapsacks; ++i) {
+		for (int j = 0; j < instance->nItems; ++j) {
+			if(bestAnt->getSolution().isSelected(j, i)) {
+				pheromoneList[i][j] += (1 - evaporationRatio);
+			}
+		}
 	}
 }
 
