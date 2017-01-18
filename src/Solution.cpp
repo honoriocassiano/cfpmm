@@ -11,8 +11,12 @@
 
 namespace cfpmm {
 
-Solution::Solution(Instance* _instance) : instance(_instance) {
+Solution::Solution(Instance* _instance) :
+		instance(_instance) {
 	assert(_instance != nullptr);
+
+	capacities = instance->getCapacities();
+	solution = std::vector<int>(this->instance->getCapacities().size(), -1);
 }
 
 Solution::~Solution() {
@@ -28,7 +32,7 @@ bool Solution::isSelected(int item, int knapsack) const {
 }
 
 std::ostream& operator<<(std::ostream& os, const Solution& solution) {
-	for(auto& i : solution.solution) {
+	for (auto& i : solution.solution) {
 		os << i << " ";
 	}
 
@@ -36,6 +40,12 @@ std::ostream& operator<<(std::ostream& os, const Solution& solution) {
 }
 
 void Solution::clear() {
+
+	capacities = instance->getCapacities();
+
+	for (int i = 0; i < instance->getCapacities().size(); ++i) {
+		solution[i] = -1;
+	}
 }
 
 } /* namespace cfpmm */
