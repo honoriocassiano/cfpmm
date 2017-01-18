@@ -58,7 +58,7 @@ void Colony::evaporate() {
 	}
 }
 
-const std::vector<int> Colony::run() {
+Solution Colony::run() {
 
 	std::vector<int> solutionValues;
 	Solution bestSolution(instance);
@@ -71,7 +71,7 @@ const std::vector<int> Colony::run() {
 		for (int i = 0; i < this->nAnts; ++i) {
 			if (solutionValues.at(i) > bestSolution.getValue()) {
 				bestSolution =
-						this->ants.at(i)->getSolution().getSolutionVector();
+						this->ants.at(i)->getSolution();
 			}
 		}
 
@@ -90,7 +90,7 @@ void Colony::iterateOverAnts() {
 }
 
 std::vector<int> Colony::getSolutionValues() {
-	std::vector<long> solutionValues;
+	std::vector<int> solutionValues;
 
 	for (int i = 0; i < this->nAnts; ++i) {
 		solutionValues.push_back(this->ants.at(i)->getSolution().getValue());

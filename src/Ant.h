@@ -46,7 +46,7 @@ private:
 	 */
 	void generateInitialSolution();
 
-	double Ant::calcProbability(int item, int knapsack);
+	double calculateProbability(int item, int knapsack);
 
 	std::vector<std::vector<double> >& pheromoneList;
 

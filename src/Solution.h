@@ -35,7 +35,7 @@ public:
 
 	bool canUpdate(int item, int knapsack) const;
 
-	bool update(int item, int knapsack) const;
+	bool update(int item, int knapsack);
 
 	/**
 	 * Getter for solution vector

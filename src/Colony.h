@@ -28,11 +28,11 @@ public:
 		return ants;
 	}
 
-	const std::vector<int> run();
+	Solution run();
 
 private:
 
-	std::vector<int> Colony::getSolutionValues();
+	std::vector<int> getSolutionValues();
 
 	void initialize();
 

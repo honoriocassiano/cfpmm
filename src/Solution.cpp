@@ -36,7 +36,7 @@ bool Solution::canUpdate(int item, int knapsack) const {
 			&& solution[knapsack] == -1;
 }
 
-bool Solution::update(int item, int knapsack) const {
+bool Solution::update(int item, int knapsack) {
 	if (canUpdate(item, knapsack)) {
 		solution[item] = knapsack;
 		remainingCapacity[knapsack] -= instance->getItems()[item].weight();

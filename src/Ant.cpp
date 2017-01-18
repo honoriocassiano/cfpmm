@@ -28,7 +28,7 @@ Ant::~Ant() {
 
 }
 
-double Ant::calcProbability(int item, int knapsack) {
+double Ant::calculateProbability(int item, int knapsack) {
 	double ph = this->pheromoneList.at(knapsack).at(item);
 
 	double hI = 1.0 * this->instance->getItems()[item].profit()
@@ -64,7 +64,7 @@ void Ant::findSolution() {
 		for (int k = 0; k < instance->getNumKnapsacks(); ++k) {
 			for (int i = 0; i < instance->getNumItems(); ++i) {
 				if (solution.canUpdate(i, k)) {
-					probabilities[k][i] = calcProbability(i, k);
+					probabilities[k][i] = calculateProbability(i, k);
 
 				} else {
 					probabilities[k][i] = 0.0;
