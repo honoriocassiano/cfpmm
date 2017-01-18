@@ -8,6 +8,7 @@
 #include "Solution.h"
 
 #include <cassert>
+#include <iomanip>
 
 namespace cfpmm {
 
@@ -62,7 +63,7 @@ double Solution::getValue() const {
 
 std::ostream& operator<<(std::ostream& os, const Solution& solution) {
 	for (auto& i : solution.solution) {
-		os << i << " ";
+		os << std::setw(3) << i << " ";
 	}
 
 	return os;
