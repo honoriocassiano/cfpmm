@@ -10,9 +10,12 @@
 #include <cassert>
 #include <iostream>
 
+#define MAX_ITERATION (10)
+
 namespace cfpmm {
 
-Colony::Colony(Instance* _instance, std::size_t _nAnts, float _evaporationRatio, double _alpha, double _beta) :
+Colony::Colony(Instance* _instance, std::size_t _nAnts, float _evaporationRatio,
+		double _alpha, double _beta) :
 		instance(_instance), nAnts(_nAnts), ants(_nAnts, nullptr), evaporationRatio(
 				_evaporationRatio), alpha(_alpha), beta(_beta) {
 
@@ -55,8 +58,26 @@ void Colony::evaporate() {
 	}
 }
 
-void Colony::run() {
-	// TODO Implement this method
+const std::vector<int> Colony::run() {
+
+	std::vector<int> solutionValues;
+	Solution bestSolution(instance);
+
+	for (int i = 0; i < MAX_ITERATION; ++i) {
+		iterateOverAnts();
+
+		solutionValues = getSolutionValues();
+
+		for (int i = 0; i < this->nAnts; ++i) {
+			if (solutionValues.at(i) > bestSolution.getValue()) {
+				bestSolution =
+						this->ants.at(i)->getSolution().getSolutionVector();
+			}
+		}
+
+	}
+
+	return bestSolution;
 }
 
 void Colony::iterateOverAnts() {
@@ -66,6 +87,16 @@ void Colony::iterateOverAnts() {
 
 	evaporate();
 	reinforce();
+}
+
+std::vector<int> Colony::getSolutionValues() {
+	std::vector<long> solutionValues;
+
+	for (int i = 0; i < this->nAnts; ++i) {
+		solutionValues.push_back(this->ants.at(i)->getSolution().getValue());
+	}
+
+	return solutionValues;
 }
 
 void Colony::reinforce() {
@@ -81,7 +112,7 @@ void Colony::reinforce() {
 
 	for (int i = 0; i < instance->nKnapsacks; ++i) {
 		for (int j = 0; j < instance->nItems; ++j) {
-			if(bestAnt->getSolution().isSelected(j, i)) {
+			if (bestAnt->getSolution().isSelected(j, i)) {
 				pheromoneList[i][j] += (1 - evaporationRatio);
 			}
 		}

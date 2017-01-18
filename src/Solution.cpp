@@ -47,6 +47,19 @@ bool Solution::update(int item, int knapsack) const {
 	}
 }
 
+double Solution::getValue() const {
+
+	int sum = 0;
+
+	for (int i = 0; i < instance->getNumItems(); ++i) {
+		if (solution[i] != -1) {
+			sum += instance->getItems()[i].profit();
+		}
+	}
+
+	return sum;
+}
+
 std::ostream& operator<<(std::ostream& os, const Solution& solution) {
 	for (auto& i : solution.solution) {
 		os << i << " ";

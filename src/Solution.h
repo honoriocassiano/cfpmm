@@ -40,7 +40,7 @@ public:
 	/**
 	 * Getter for solution vector
 	 */
-	const std::vector<int>& getSolution() const {
+	const std::vector<int>& getSolutionVector() const {
 		return solution;
 	}
 
@@ -59,6 +59,8 @@ public:
 	const std::vector<int>& getRemainingCapacity() const {
 		return remainingCapacity;
 	}
+
+	double getValue() const;
 
 	friend std::ostream& operator<<(std::ostream& os, const Solution& solution);
 

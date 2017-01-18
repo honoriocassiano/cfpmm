@@ -28,9 +28,11 @@ public:
 		return ants;
 	}
 
-	void run();
+	const std::vector<int> run();
 
 private:
+
+	std::vector<int> Colony::getSolutionValues();
 
 	void initialize();
 

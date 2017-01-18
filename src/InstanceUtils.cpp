@@ -166,7 +166,7 @@ bool InstanceUtils::isValidSolution(const Solution& _solution) {
 
 	auto& capacities = _solution.getInstance()->getCapacities();
 	auto& items = _solution.getInstance()->getItems();
-	auto& solution = _solution.getSolution();
+	auto& solution = _solution.getSolutionVector();
 
 	int totalWeights[capacities.size()];
 
