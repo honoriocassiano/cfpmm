@@ -12,9 +12,9 @@
 
 namespace cfpmm {
 
-Colony::Colony(Instance* _instance, std::size_t _nAnts, float _evaporationRatio) :
+Colony::Colony(Instance* _instance, std::size_t _nAnts, float _evaporationRatio, double _alpha, double _beta) :
 		instance(_instance), nAnts(_nAnts), ants(_nAnts, nullptr), evaporationRatio(
-				_evaporationRatio) {
+				_evaporationRatio), alpha(_alpha), beta(_beta) {
 
 	if (evaporationRatio >= 1 || evaporationRatio <= 0) {
 		std::cerr
@@ -43,7 +43,7 @@ void Colony::initialize() {
 			std::vector<double>(instance->nItems, initialPheromoneValue));
 
 	for (int i = 0; i < nAnts; ++i) {
-		ants[i] = new Ant(instance, pheromoneList);
+		ants[i] = new Ant(instance, pheromoneList, alpha, beta);
 	}
 }
 
@@ -60,7 +60,12 @@ void Colony::run() {
 }
 
 void Colony::iterateOverAnts() {
-	// TODO Implement this method
+	for (int a = 0; a < nAnts; ++a) {
+		ants[a]->findSolution();
+	}
+
+	evaporate();
+	reinforce();
 }
 
 void Colony::reinforce() {

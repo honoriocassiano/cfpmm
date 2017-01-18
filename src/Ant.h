@@ -37,15 +37,14 @@ public:
 		return 0;
 	}
 
+	void findSolution();
+
 private:
 
 	/**
 	 * Generate a initial solution
 	 */
 	void generateInitialSolution();
-
-	// TODO Rename this method
-	void findSolution();
 
 	double Ant::calcProbability(int item, int knapsack);
 
