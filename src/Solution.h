@@ -33,6 +33,10 @@ public:
 	bool isSelected(int item) const;
 	bool isSelected(int item, int knapsack) const;
 
+	bool canUpdate(int item, int knapsack) const;
+
+	bool update(int item, int knapsack) const;
+
 	/**
 	 * Getter for solution vector
 	 */

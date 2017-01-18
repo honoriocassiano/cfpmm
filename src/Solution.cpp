@@ -31,6 +31,22 @@ bool Solution::isSelected(int item, int knapsack) const {
 	return solution[item] == knapsack;
 }
 
+bool Solution::canUpdate(int item, int knapsack) const {
+	return remainingCapacity[knapsack] - instance->getItems()[item].weight()
+			&& solution[knapsack] == -1;
+}
+
+bool Solution::update(int item, int knapsack) const {
+	if (canUpdate(item, knapsack)) {
+		solution[item] = knapsack;
+		remainingCapacity[knapsack] -= instance->getItems()[item].weight();
+
+		return true;
+	} else {
+		return false;
+	}
+}
+
 std::ostream& operator<<(std::ostream& os, const Solution& solution) {
 	for (auto& i : solution.solution) {
 		os << i << " ";
