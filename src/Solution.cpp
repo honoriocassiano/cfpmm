@@ -15,7 +15,7 @@ Solution::Solution(Instance* _instance) :
 		instance(_instance) {
 	assert(_instance != nullptr);
 
-	capacities = instance->getCapacities();
+	remainingCapacity = instance->getCapacities();
 	solution = std::vector<int>(this->instance->getCapacities().size(), -1);
 }
 
@@ -70,7 +70,7 @@ std::ostream& operator<<(std::ostream& os, const Solution& solution) {
 
 void Solution::clear() {
 
-	capacities = instance->getCapacities();
+	remainingCapacity = instance->getCapacities();
 
 	for (int i = 0; i < instance->getCapacities().size(); ++i) {
 		solution[i] = -1;

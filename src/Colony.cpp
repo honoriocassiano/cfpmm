@@ -74,7 +74,6 @@ Solution Colony::run() {
 						this->ants.at(i)->getSolution();
 			}
 		}
-
 	}
 
 	return bestSolution;

@@ -68,7 +68,6 @@ private:
 	Instance* instance;
 
 	std::vector<int> solution;
-	std::vector<int> capacities;
 	std::vector<int> remainingCapacity;
 
 	friend class Ant;

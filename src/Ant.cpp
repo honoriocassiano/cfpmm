@@ -63,6 +63,7 @@ void Ant::findSolution() {
 
 		for (int k = 0; k < instance->getNumKnapsacks(); ++k) {
 			for (int i = 0; i < instance->getNumItems(); ++i) {
+
 				if (solution.canUpdate(i, k)) {
 					probabilities[k][i] = calculateProbability(i, k);
 
@@ -106,9 +107,7 @@ void Ant::findSolution() {
 			}
 			++k;
 		}
-
 	}
-
 }
 
 void Ant::generateInitialSolution() {
