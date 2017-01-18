@@ -56,6 +56,10 @@ public:
 		return instance;
 	}
 
+	const std::vector<int>& getRemainingCapacity() const {
+		return remainingCapacity;
+	}
+
 	friend std::ostream& operator<<(std::ostream& os, const Solution& solution);
 
 private:

@@ -55,6 +55,14 @@ void Colony::evaporate() {
 	}
 }
 
+void Colony::run() {
+	// TODO Implement this method
+}
+
+void Colony::iterateOverAnts() {
+	// TODO Implement this method
+}
+
 void Colony::reinforce() {
 	Ant* bestAnt = ants[0];
 

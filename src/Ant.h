@@ -23,7 +23,7 @@ public:
 	 * Initializer for an ant
 	 * @param instance instance of the problem
 	 */
-	Ant(Instance* instance, std::vector<std::vector<double> >& pheromoneList);
+	Ant(Instance* instance, std::vector<std::vector<double> >& pheromoneList, double alpha, double beta);
 	virtual ~Ant();
 
 	/**
@@ -44,11 +44,20 @@ private:
 	 */
 	void generateInitialSolution();
 
+	// TODO Rename this method
+	void findSolution();
+
+	double Ant::calcProbability(int item, int knapsack);
+
 	std::vector<std::vector<double> >& pheromoneList;
 
 private:
 
+	double alpha;
+	double beta;
+
 	Solution solution; /**< Solution carried by ant */
+	const Instance* instance;
 };
 
 } /* namespace cfpmm */

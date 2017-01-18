@@ -28,9 +28,13 @@ public:
 		return ants;
 	}
 
+	void run();
+
 private:
 
 	void initialize();
+
+	void iterateOverAnts();
 
 	void evaporate();
 	void reinforce();

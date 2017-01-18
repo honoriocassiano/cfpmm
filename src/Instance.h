@@ -34,6 +34,14 @@ public:
 		return capacities;
 	}
 
+	std::size_t getNumItems() const {
+		return nItems;
+	}
+
+	std::size_t getNumKnapsacks() const {
+		return nKnapsacks;
+	}
+
 private:
 	std::size_t nItems;
 	std::size_t nKnapsacks;
