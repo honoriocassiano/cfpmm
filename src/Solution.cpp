@@ -17,7 +17,7 @@ Solution::Solution(Instance* _instance) :
 	assert(_instance != nullptr);
 
 	remainingCapacity = instance->getCapacities();
-	solution = std::vector<int>(this->instance->getCapacities().size(), -1);
+	solution = std::vector<int>(this->instance->getNumItems(), -1);
 }
 
 Solution::~Solution() {
@@ -33,7 +33,7 @@ bool Solution::isSelected(int item, int knapsack) const {
 }
 
 bool Solution::canUpdate(int item, int knapsack) const {
-	return (remainingCapacity[knapsack] - instance->getItems()[item].weight() >= 0)
+	return ((remainingCapacity[knapsack] - instance->getItems()[item].weight()) >= 0)
 			&& (solution[knapsack] == -1);
 }
 
