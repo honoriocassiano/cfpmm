@@ -99,6 +99,12 @@ Solution Colony::run() {
 //			Log("Valor besta: %lf", bestSolution.getValue());
 
 			Log("AQUI");
+			for (auto& v : bestSolution.getSolutionVector()) {
+				std::cout << std::setw(3) << v;
+			}
+
+			std::cout << std::endl;
+
 			for (auto& v : this->ants.at(i)->getSolution().getSolutionVector()) {
 				std::cout << std::setw(3) << v;
 			}
