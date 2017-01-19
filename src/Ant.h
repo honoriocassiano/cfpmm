@@ -33,8 +33,8 @@ public:
 		return solution;
 	}
 
-	long getValue() const {
-		return 0;
+	double getValue() const {
+		return solution.getValue();
 	}
 
 	void findSolution();

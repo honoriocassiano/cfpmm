@@ -7,12 +7,15 @@
 
 #include "Ant.h"
 
+#include <iostream>
 #include <vector>
 #include <random>
 #include <chrono>
 #include <algorithm>
 
 #include "Item.h"
+
+#include "Debug.h"
 
 namespace cfpmm {
 
@@ -121,9 +124,15 @@ void Ant::generateInitialSolution() {
 
 		for (int k = 0; k < capacities.size(); ++k) {
 
+			Log(
+					"i: %d, k: %d, remainingCapacities[k]: %d, items[i].weight(): %d",
+					i, k, remainingCapacities[k], items[i].weight());
+
 			if (remainingCapacities[k] >= items[i].weight()) {
 				solution[i] = k;
 				remainingCapacities[k] -= items[i].weight();
+
+				std::cout << std::endl;
 
 				break;
 			}
@@ -131,6 +140,10 @@ void Ant::generateInitialSolution() {
 	}
 
 	this->solution.solution = std::move(solution);
+
+	Log("Solução da formiga");
+	std::cout << this->solution << std::endl << std::endl;
 }
 
 } /* namespace cfpmm */
+

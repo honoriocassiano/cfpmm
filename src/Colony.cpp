@@ -8,9 +8,14 @@
 #include "Colony.h"
 
 #include <cassert>
+#include <cstddef>
+#include <cstdlib>
 #include <iostream>
 
-#define MAX_ITERATION (10)
+#include "Debug.h"
+#include "Utils.h"
+
+#define MAX_ITERATION (1)
 
 namespace cfpmm {
 
@@ -46,6 +51,7 @@ void Colony::initialize() {
 			std::vector<double>(instance->nItems, initialPheromoneValue));
 
 	for (int i = 0; i < nAnts; ++i) {
+		Log("****************************************************************");
 		ants[i] = new Ant(instance, pheromoneList, alpha, beta);
 	}
 }
@@ -64,14 +70,44 @@ Solution Colony::run() {
 	Solution bestSolution(instance);
 
 	for (int i = 0; i < MAX_ITERATION; ++i) {
+
+//		Log("****************************************************************");
+//		Log("************************ ITERAÇÃO: %d *************************", i);
+//		Log("****************************************************************");
+
 		iterateOverAnts();
 
 		solutionValues = getSolutionValues();
 
+//		Log("AQUI");
+//		for (auto& v : solutionValues) {
+//			std::cout << std::setw(3) << v;
+//		}
+//
+//		std::cout << std::endl;
+//		Log("AQUI NÃO");
+
 		for (int i = 0; i < this->nAnts; ++i) {
+
+//			printVector(solutionValues);
+//			for (auto& v : solutionValues) {
+//				std::cout << std::setw(3) << v << " ";
+//			}
+//
+//			std::cout << std::endl;
+
+//			Log("Valor besta: %lf", bestSolution.getValue());
+
+			Log("AQUI");
+			for (auto& v : this->ants.at(i)->getSolution().getSolutionVector()) {
+				std::cout << std::setw(3) << v;
+			}
+
+			std::cout << std::endl;
+			Log("AQUI NÃO");
+
 			if (solutionValues.at(i) > bestSolution.getValue()) {
-				bestSolution =
-						this->ants.at(i)->getSolution();
+				bestSolution = this->ants.at(i)->getSolution();
 			}
 		}
 	}
