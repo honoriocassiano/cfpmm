@@ -41,6 +41,8 @@ public:
 
 private:
 
+	bool loop();
+
 	/**
 	 * Generate a initial solution
 	 */

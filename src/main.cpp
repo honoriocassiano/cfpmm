@@ -26,15 +26,16 @@ int main(void) {
 //	InstanceUtils::generate(10, 5, correlation::WEAK, true);
 
 //	std::vector<int> capacities { 10, 21, 52, 33 };
-	std::vector<int> capacities { 10, 21, 52, 33, 5 };
+//	std::vector<int> capacities { 10, 21, 52, 33, 5 };
+	std::vector<int> capacities { 2, 15, 22, 17, 5 };
 
-	std::vector<Item> items { Item(5, 4), Item(10, 64), Item(3, 9), Item(19, 5),
+	std::vector<Item> items { Item(5, 4), Item(10, 64), Item(3, 9), Item(13, 5),
 			Item(11, 8), Item(8, 18), Item(7, 4), Item(7, 5) };
 
 	Instance* instance = new Instance(items.size(), capacities.size(), items,
 			capacities);
 
-	Colony* colony = new Colony(instance, 1, 0.9, 1, 1);
+	Colony* colony = new Colony(instance, 10, 0.9, 1, 1);
 
 	Solution sol = colony->run();
 

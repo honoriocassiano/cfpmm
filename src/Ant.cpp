@@ -31,6 +31,61 @@ Ant::~Ant() {
 
 }
 
+bool Ant::loop() {
+
+	using rid = std::uniform_real_distribution<double>;
+
+	// Create random number generator generator
+	std::default_random_engine generator(
+			std::chrono::system_clock::now().time_since_epoch().count());
+
+	rid distribution(0, 1);
+
+	double prob = distribution(generator);
+
+	double probabilities[this->instance->getNumKnapsacks()][this->instance->getNumItems()];
+	double sumOfProbabilities = 0;
+
+	bool itemAvailable = false;
+
+	for (int k = 0; k < this->instance->getNumKnapsacks(); ++k) {
+		for (int i = 0; i < this->instance->getNumItems(); ++i) {
+			if (this->solution.canUpdate(i, k)) {
+				probabilities[k][i] = calculateProbability(i, k);
+				itemAvailable = true;
+			} else {
+				probabilities[k][i] = 0.0f;
+			}
+
+			sumOfProbabilities += probabilities[k][i];
+		}
+	}
+
+	if (!itemAvailable) {
+		return false;
+	}
+
+	for (int k = 0; k < instance->getNumKnapsacks(); ++k) {
+		for (int i = 0; i < instance->getNumItems(); ++i) {
+			probabilities[k][i] = (1.0 * probabilities[k][i])
+					/ sumOfProbabilities;
+		}
+	}
+
+	float sum = 0.0f;
+	for (int k = 0; k < this->instance->getNumKnapsacks(); ++k) {
+		for (int i = 0; i < this->instance->getNumItems(); ++i) {
+			if (prob < sum + probabilities[k][i]) {
+				this->solution.update(i, k);
+				return true;
+			}
+			sum += probabilities[k][i];
+		}
+	}
+
+	return false;
+}
+
 double Ant::calculateProbability(int item, int knapsack) {
 	double ph = this->pheromoneList.at(knapsack).at(item);
 
@@ -44,73 +99,8 @@ void Ant::findSolution() {
 
 	solution.clear();
 
-	using rid = std::uniform_real_distribution<double>;
-
-	// Create random number generator generator
-	std::default_random_engine generator(
-			std::chrono::system_clock::now().time_since_epoch().count());
-
-	rid distribution(0, 1);
-
-	bool loop = true;
-
-	while (loop) {
-		double prob = distribution(generator);
-
-		double probabilities[instance->getNumKnapsacks()][instance->getNumItems()] {
-				0 };
-
-		double probabilitiesSum = 0;
-
-		bool hasAvaliableItem = true;
-
-		for (int k = 0; k < instance->getNumKnapsacks(); ++k) {
-			for (int i = 0; i < instance->getNumItems(); ++i) {
-
-				if (solution.canUpdate(i, k)) {
-					probabilities[k][i] = calculateProbability(i, k);
-
-				} else {
-					probabilities[k][i] = 0.0;
-
-					hasAvaliableItem = false;
-				}
-
-				probabilitiesSum += probabilities[k][i];
-			}
-		}
-
-		if (!hasAvaliableItem) {
-			loop = false;
-		}
-
-		// Normalize probabilities
-		for (int k = 0; k < instance->getNumKnapsacks(); ++k) {
-			for (int i = 0; i < instance->getNumItems(); ++i) {
-				probabilities[k][i] /= probabilitiesSum;
-			}
-		}
-
-		double sum = 0.0;
-
-		bool itemChoosed = false;
-
-		int k = 0, i = 0;
-
-		while (k < instance->getNumKnapsacks() && !itemChoosed) {
-			while (i < instance->getNumItems() && !itemChoosed) {
-
-				if (prob < sum + probabilities[k][i]) {
-					this->solution.update(i, k);
-
-					itemChoosed = true;
-				}
-				sum += probabilities[k][i];
-				++i;
-			}
-			++k;
-		}
-	}
+	while (loop())
+		;
 }
 
 void Ant::generateInitialSolution() {
@@ -124,15 +114,9 @@ void Ant::generateInitialSolution() {
 
 		for (int k = 0; k < capacities.size(); ++k) {
 
-			Log(
-					"i: %d, k: %d, remainingCapacities[k]: %d, items[i].weight(): %d",
-					i, k, remainingCapacities[k], items[i].weight());
-
 			if (remainingCapacities[k] >= items[i].weight()) {
 				solution[i] = k;
 				remainingCapacities[k] -= items[i].weight();
-
-				std::cout << std::endl;
 
 				break;
 			}
@@ -140,9 +124,6 @@ void Ant::generateInitialSolution() {
 	}
 
 	this->solution.solution = std::move(solution);
-
-	Log("Solução da formiga");
-	std::cout << this->solution << std::endl << std::endl;
 }
 
 } /* namespace cfpmm */
