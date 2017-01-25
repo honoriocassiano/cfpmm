@@ -33,14 +33,14 @@ int main(void) {
 	std::vector<int> capacities { 6, 11, 4, 13 };
 
 	std::vector<Item> items { Item(5, 4), Item(10, 20), Item(3, 9), Item(12, 15),
-				Item(2, 1) };
+				Item(3, 1), Item(5, 1) };
 //	std::vector<Item> items { Item(5, 4), Item(10, 64), Item(3, 9), Item(13, 5),
 //			Item(11, 8), Item(8, 18), Item(7, 4), Item(7, 5) };
 
 	Instance* instance = new Instance(items.size(), capacities.size(), items,
 			capacities);
 
-	Colony* colony = new Colony(instance, 10, 0.9, 1, 1);
+	Colony* colony = new Colony(instance, 1, 0.9, 1, 1);
 
 	Solution sol = colony->run();
 

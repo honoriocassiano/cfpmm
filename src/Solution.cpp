@@ -73,7 +73,7 @@ void Solution::clear() {
 
 	remainingCapacity = instance->getCapacities();
 
-	for (int i = 0; i < instance->getCapacities().size(); ++i) {
+	for (int i = 0; i < instance->getNumItems(); ++i) {
 		solution[i] = -1;
 	}
 }
