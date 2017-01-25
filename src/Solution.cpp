@@ -34,7 +34,7 @@ bool Solution::isSelected(int item, int knapsack) const {
 
 bool Solution::canUpdate(int item, int knapsack) const {
 	return ((remainingCapacity[knapsack] - instance->getItems()[item].weight()) >= 0)
-			&& (solution[knapsack] == -1);
+			&& (solution[item] == -1);
 }
 
 bool Solution::update(int item, int knapsack) {
