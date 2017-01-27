@@ -16,6 +16,7 @@
 
 #include "Colony.h"
 #include "Instance.h"
+#include "InstanceUtils.h"
 #include "Item.h"
 #include "Solution.h"
 #include "Cartesian.h"
@@ -35,11 +36,16 @@ int main(void) {
 			capacities);
 
 	
-	cartesian(instance);
+	// cartesian(instance);
 	
-/*
-//	InstanceUtils::generate(10, 5, correlation::WEAK, true);
+	// Colony* colony = new Colony(instance, 10, 0.9, 1, 1);
 
+	// Solution sol = colony->run();
+	
+	// cout << "Resultado: " << sol.getValue() << endl;
+
+	InstanceUtils::generate(10, 5, correlation::WEAK, true);
+/*
 //	std::vector<int> capacities { 10, 21, 52, 33 };
 //	std::vector<int> capacities { 10, 21, 52, 33, 5 };
 //	std::vector<int> capacities { 2, 15, 22, 17, 5 };

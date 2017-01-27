@@ -65,7 +65,8 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 		for (int i = 0; i < nItems; i++) {
 			// Knapsack Problems - page 185
 			int weight = distribution(generator);
-			int profit = RAND(weight - 100, weight + 100, generator);
+
+			int profit = RAND(std::max((weight - 100), MIN), weight + 100, generator);
 
 			items.push_back(Item(weight, profit));
 		}
@@ -77,7 +78,8 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 		for (int i = 0; i < nItems; i++) {
 			// Knapsack Problems - page 186
 			int weight = distribution(generator);
-			int profit = RAND(weight - 100, weight + 100, generator);
+
+			int profit = RAND(std::max((weight - 100), MIN), weight + 100, generator);
 		}
 	}
 
@@ -99,11 +101,16 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 			for (int k = 0; k < i; k++) {
 				ck += capacities[k];
 			}
-
+			
+			
+			// TUDO VERIFICAR O C DO "C"ARALHO
 			uid distribution(MIN, MIN + wj - ck);
 
 			int c = distribution(generator);
 
+			if (true) {
+				std::cout << "MIN: " << MIN << "\tMIN do carallho: " << MIN + wj - ck << "\tc: " << c << std::endl;
+			}
 			capacities.push_back(c);
 			lastCapacity -= c;
 		}
@@ -115,7 +122,8 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 		double minBound = 0.4 * weightSum / nKnapsacks;
 		double maxBound = 0.6 * weightSum / nKnapsacks;
 		double lastCapacity = 0.5 * weightSum;
-
+		
+		
 		uid distribution(minBound, maxBound);
 
 		for (int i = 0; i < nKnapsacks - 1; i++) {
