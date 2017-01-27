@@ -7,15 +7,20 @@
 #include <iostream>
 #include <numeric>
 #include <vector>
-using namespace std;
 
-void cartesian( int nItems,  int nKnapsacks) {
+#include "Instance.h"
+#include "Solution.h"
+
+using namespace std;
+using namespace cfpmm;
+
+void cartesian( Instance* instance ) {
 	
-	vector<int> v_set(nKnapsacks+1);
+	vector<int> v_set((long long int) instance->getNumKnapsacks() + 1);
 	
 	std::iota(v_set.begin(), v_set.end(), -1);
 	
-	vector<vector<int>> v  (nItems, v_set);
+	vector<vector<int>> v  ((long long int) instance->getNumItems(), v_set);
 	
 	auto product = []( long long a, vector<int>& b ) { 
 		return a*b.size();
@@ -25,6 +30,9 @@ void cartesian( int nItems,  int nKnapsacks) {
 
 	vector<int> u(v.size());
 
+	cfpmm::Solution bestSolution(instance);
+	double bestValue = 0.0;
+	
 	for( long long n = 0 ; n < N ; ++n ) {
 
 		lldiv_t q { n, 0 };
@@ -36,10 +44,40 @@ void cartesian( int nItems,  int nKnapsacks) {
 
 		}
 		
+		cfpmm::Solution solution(instance);
+		
+		// bool canUp = true;
+		double value;
+		
+		for( int p = 0; p < u.size(); p++ ) {
+			if (u[p] != -1) {
+				if (solution.canUpdate(p, u[p])) {
+					solution.update(p, u[p]);
+					value = solution.getValue();
+					
+					if (value > bestValue) {
+						bestValue = value;
+						bestSolution = solution;
+					}
+				} else {
+					solution.clear();
+					// canUp = false;
+					break;
+				}
+			}
+		}
+		
+		// if (canUp) {
+		// 	for( int x : u ) cout << x << ' ';
+		// 	cout << "\t = " << value << "\n";
+		// }
+		
 		// Do what you want here with u.
-		for( int x : u ) cout << x << ' ';
-		cout << '\n';
+		// for( int x : u ) cout << x << ' ';
+		// cout << '\n';
 	}
+	
+	cout << "\n\n\tResultado: \n" << bestSolution << "\t = " << bestValue << "\n";
 }
 
 #endif

@@ -18,11 +18,26 @@
 #include "Instance.h"
 #include "Item.h"
 #include "Solution.h"
+#include "Cartesian.h"
 
 int main(void) {
 
 	using namespace cfpmm;
 
+
+
+	// Instância do Geovani
+	std::vector<int> capacities { 6, 11, 55, 10, 2, 44, 5 };
+
+	std::vector<Item> items { Item(6, 4), Item(6, 20), Item(6, 4), Item(6, 20), Item(6, 4), Item(6, 20), Item(3, 9), Item(12, 15), Item(3, 1) };
+
+	Instance* instance = new Instance(items.size(), capacities.size(), items,
+			capacities);
+
+	
+	cartesian(instance);
+	
+/*
 //	InstanceUtils::generate(10, 5, correlation::WEAK, true);
 
 //	std::vector<int> capacities { 10, 21, 52, 33 };
@@ -85,6 +100,6 @@ int main(void) {
 	//**********************************************************
 
 	std::cout << std::endl;
-
+*/
 	return 0;
 }
