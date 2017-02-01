@@ -25,7 +25,7 @@ public:
 	/**
 	 * @param instance Instance of problem
 	 */
-	Solution(Instance* instance);
+	Solution(const Instance* instance);
 	virtual ~Solution();
 
 	void clear();
@@ -65,7 +65,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const Solution& solution);
 
 private:
-	Instance* instance;
+	const Instance* instance;
 
 	std::vector<int> solution;
 	std::vector<int> remainingCapacity;

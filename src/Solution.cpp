@@ -12,7 +12,7 @@
 
 namespace cfpmm {
 
-Solution::Solution(Instance* _instance) :
+Solution::Solution(const Instance* _instance) :
 		instance(_instance) {
 	assert(_instance != nullptr);
 
