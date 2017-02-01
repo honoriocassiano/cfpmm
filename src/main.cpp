@@ -10,8 +10,6 @@
 #include <iostream>
 #include <vector>
 
-#define DEBUG 1
-
 #include "Debug.h"
 #include "Colony.h"
 #include "Instance.h"

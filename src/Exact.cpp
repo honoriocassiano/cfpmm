@@ -7,11 +7,17 @@
 
 #include "Exact.h"
 
+#include "flags.h"
+
 #include <cstdlib>
 #include <cmath>
-#include <iostream>
+
 #include <numeric>
 #include <vector>
+
+#if DEBUG
+#include <cstdio>
+#endif
 
 namespace cfpmm {
 
@@ -38,7 +44,22 @@ Solution Exact::solve() {
 	Solution bestSolution(instance);
 	double bestValue = 0.0;
 
+#if DEBUG
+	int progress = 1;
+#endif
+
 	for (long long n = 0; n < N; ++n) {
+
+#if DEBUG
+		auto temp = (int) (n * 100.0 / N) + 1;
+
+		if (temp > progress) {
+			std::printf("\rProgresso: %d%%", temp);
+			std::fflush(stdout);
+
+			progress = temp;
+		}
+#endif
 
 		lldiv_t q { n, 0 };
 
@@ -51,7 +72,6 @@ Solution Exact::solve() {
 
 		Solution solution(instance);
 
-		// bool canUp = true;
 		double value;
 
 		for (int p = 0; p < u.size(); p++) {
@@ -66,12 +86,15 @@ Solution Exact::solve() {
 					}
 				} else {
 					solution.clear();
-					// canUp = false;
 					break;
 				}
 			}
 		}
 	}
+
+#if DEBUG
+	std::printf("\n");
+#endif
 
 	return bestSolution;
 }
