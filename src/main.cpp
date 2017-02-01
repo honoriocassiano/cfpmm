@@ -7,11 +7,12 @@
 //============================================================================
 
 #include <ctime>
-#include <vector>
 #include <iostream>
+#include <vector>
 
-#define DEBUG
+#define DEBUG 1
 
+#include "Debug.h"
 #include "Colony.h"
 #include "Instance.h"
 #include "InstanceUtils.h"

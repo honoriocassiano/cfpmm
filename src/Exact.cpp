@@ -8,6 +8,7 @@
 #include "Exact.h"
 
 #include <cstdlib>
+#include <cmath>
 #include <iostream>
 #include <numeric>
 #include <vector>
@@ -26,13 +27,11 @@ Solution Exact::solve() {
 
 	std::iota(v_set.begin(), v_set.end(), -1);
 
-	std::vector<std::vector<int>> v((long long int) instance->getNumItems(), v_set);
+	std::vector<std::vector<int>> v((long long int) instance->getNumItems(),
+			v_set);
 
-	auto product = []( long long a, std::vector<int>& b ) {
-		return a*b.size();
-	};
-
-	const long long N = std::accumulate(v.begin(), v.end(), 1LL, product);
+	const long long N = std::pow((long long) instance->getNumKnapsacks() + 1,
+			(long long) instance->getNumItems());
 
 	std::vector<int> u(v.size());
 
