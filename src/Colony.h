@@ -17,7 +17,7 @@ namespace cfpmm {
 
 class Colony {
 public:
-	Colony(Instance* instance, std::size_t nAnts, float evaporationRatio, double alpha, double beta);
+	Colony(const Instance* instance, std::size_t nAnts, float evaporationRatio, double alpha, double beta);
 	virtual ~Colony();
 
 	const std::vector<std::vector<double>>& getPheromoneList() const {
@@ -43,7 +43,7 @@ private:
 
 	std::size_t nAnts;
 
-	Instance* instance;
+	const Instance* instance;
 
 	std::vector<Ant*> ants;
 

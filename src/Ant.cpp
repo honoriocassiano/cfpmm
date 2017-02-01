@@ -19,7 +19,7 @@
 
 namespace cfpmm {
 
-Ant::Ant(Instance* _instance, std::vector<std::vector<double> >& _pheromoneList,
+Ant::Ant(const Instance* _instance, std::vector<std::vector<double> >& _pheromoneList,
 		double _alpha, double _beta) :
 		solution(_instance), pheromoneList(_pheromoneList), instance(_instance), alpha(
 				_alpha), beta(_beta) {

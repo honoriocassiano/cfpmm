@@ -19,7 +19,7 @@
 
 namespace cfpmm {
 
-Colony::Colony(Instance* _instance, std::size_t _nAnts, float _evaporationRatio,
+Colony::Colony(const Instance* _instance, std::size_t _nAnts, float _evaporationRatio,
 		double _alpha, double _beta) :
 		instance(_instance), nAnts(_nAnts), ants(_nAnts, nullptr), evaporationRatio(
 				_evaporationRatio), alpha(_alpha), beta(_beta) {

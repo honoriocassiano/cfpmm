@@ -23,7 +23,7 @@ public:
 	 * Initializer for an ant
 	 * @param instance instance of the problem
 	 */
-	Ant(Instance* instance, std::vector<std::vector<double> >& pheromoneList, double alpha, double beta);
+	Ant(const Instance* instance, std::vector<std::vector<double> >& pheromoneList, double alpha, double beta);
 	virtual ~Ant();
 
 	/**
