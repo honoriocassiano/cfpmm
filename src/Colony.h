@@ -9,6 +9,7 @@
 #define COLONY_H_
 
 #include <vector>
+#include <tuple>
 
 #include "Ant.h"
 #include "Instance.h"
@@ -28,7 +29,7 @@ public:
 		return ants;
 	}
 
-	Solution run();
+	std::tuple<Solution, int> run();
 
 private:
 

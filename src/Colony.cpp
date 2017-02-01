@@ -65,12 +65,13 @@ void Colony::evaporate() {
 	}
 }
 
-Solution Colony::run() {
+std::tuple<Solution, int> Colony::run() {
 
 	std::vector<int> solutionValues;
 	Solution bestSolution(instance);
 
 	int brazilian_iterations = 0;
+	int iterations = 0;
 
 	while (brazilian_iterations < MAX_BRAZILIAN_ITERATION) {
 
@@ -93,9 +94,11 @@ Solution Colony::run() {
 		} else {
 			brazilian_iterations = 0;
 		}
+
+		++iterations;
 	}
 
-	return bestSolution;
+	return std::make_tuple(bestSolution, iterations);
 }
 
 void Colony::iterateOverAnts() {
