@@ -17,12 +17,12 @@
 #include "Debug.h"
 #include "Utils.h"
 
-#define MAX_ITERATION (100)
+#define MAX_BRAZILIAN_ITERATION (50)
 
 namespace cfpmm {
 
-Colony::Colony(const Instance* _instance, std::size_t _nAnts, float _evaporationRatio,
-		double _alpha, double _beta) :
+Colony::Colony(const Instance* _instance, std::size_t _nAnts,
+		float _evaporationRatio, double _alpha, double _beta) :
 		instance(_instance), nAnts(_nAnts), ants(_nAnts, nullptr), evaporationRatio(
 				_evaporationRatio), alpha(_alpha), beta(_beta) {
 
@@ -70,16 +70,28 @@ Solution Colony::run() {
 	std::vector<int> solutionValues;
 	Solution bestSolution(instance);
 
-	for (int i = 0; i < MAX_ITERATION; ++i) {
+	int brazilian_iterations = 0;
+
+	while (brazilian_iterations < MAX_BRAZILIAN_ITERATION) {
 
 		iterateOverAnts();
 
 		solutionValues = getSolutionValues();
 
+		bool updated = false;
+
 		for (int i = 0; i < this->nAnts; ++i) {
 			if (solutionValues.at(i) > bestSolution.getValue()) {
 				bestSolution = this->ants.at(i)->getSolution();
+
+				updated = true;
 			}
+		}
+
+		if(!updated) {
+			++brazilian_iterations;
+		} else {
+			brazilian_iterations = 0;
 		}
 	}
 
