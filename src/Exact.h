@@ -8,14 +8,14 @@ namespace cfpmm {
 
 class Exact {
 public:
-	Exact(Instance* instance);
+	Exact(const Instance* instance);
 	virtual ~Exact();
 
 	Solution solve();
 
 private:
 
-	Instance* instance;
+	const Instance* instance;
 };
 }
 

@@ -14,7 +14,7 @@
 
 namespace cfpmm {
 
-Exact::Exact(Instance* _instance) :
+Exact::Exact(const Instance* _instance) :
 		instance(_instance) {
 }
 
