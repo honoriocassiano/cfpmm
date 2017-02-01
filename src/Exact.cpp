@@ -28,7 +28,7 @@ Exact::Exact(const Instance* _instance) :
 Exact::~Exact() {
 }
 
-Solution Exact::solve() {
+Solution Exact::solve() const {
 	std::vector<int> v_set((long long int) instance->getNumKnapsacks() + 1);
 
 	std::iota(v_set.begin(), v_set.end(), -1);

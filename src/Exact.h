@@ -11,7 +11,7 @@ public:
 	Exact(const Instance* instance);
 	virtual ~Exact();
 
-	Solution solve();
+	Solution solve() const;
 
 private:
 

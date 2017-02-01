@@ -7,6 +7,8 @@
 
 #include "Colony.h"
 
+#include "flags.h"
+
 #include <cassert>
 #include <cstddef>
 #include <cstdlib>
@@ -69,10 +71,6 @@ Solution Colony::run() {
 	Solution bestSolution(instance);
 
 	for (int i = 0; i < MAX_ITERATION; ++i) {
-
-//		Log("****************************************************************");
-//		Log("************************ ITERAÇÃO: %d *************************", i);
-//		Log("****************************************************************");
 
 		iterateOverAnts();
 
