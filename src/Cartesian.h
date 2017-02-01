@@ -77,7 +77,7 @@ void cartesian( Instance* instance ) {
 		// cout << '\n';
 	}
 	
-	cout << "\n\n\tResultado: \n" << bestSolution << "\t = " << bestValue << "\n";
+	cout << "\n\tResultado exato: \n" << bestSolution << "\t = " << bestValue << "\n";
 }
 
 #endif

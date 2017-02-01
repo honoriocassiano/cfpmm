@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <iostream>
 #include <vector>
+#include <ctime>
 
 #include "Utils.h"
 
@@ -28,23 +29,34 @@ int main(void) {
 
 
 	// Instância do Geovani
-	std::vector<int> capacities { 6, 11, 55, 10, 2, 44, 5 };
+	// std::vector<int> capacities { 6, 11, 55, 10, 2, 44, 5 };
+	
+	// std::vector<Item> items { Item(6, 4), Item(6, 20), Item(6, 4), Item(6, 20), Item(6, 4), Item(6, 20), Item(3, 9), Item(12, 15), Item(3, 1) };
 
-	std::vector<Item> items { Item(6, 4), Item(6, 20), Item(6, 4), Item(6, 20), Item(6, 4), Item(6, 20), Item(3, 9), Item(12, 15), Item(3, 1) };
-
+	// Instância gerada
+	std::vector<int> capacities { 1499, 78, 336, 492, 35 };
+	std::vector<Item> items { Item(487, 456), Item(269, 209), Item(542, 638), Item(169, 70), Item(543, 518), Item(859, 956), Item(916, 889), Item(878, 828), Item(116, 105), Item(102, 159) };
+	
 	Instance* instance = new Instance(items.size(), capacities.size(), items,
 			capacities);
 
+	const clock_t begin_time_exact = clock();
 	
-	// cartesian(instance);
+	cartesian(instance);
 	
-	// Colony* colony = new Colony(instance, 10, 0.9, 1, 1);
+	cout << "Tempo de execução (Seg): " << float( clock () - begin_time_exact ) /  CLOCKS_PER_SEC << endl;
+	
+	Colony* colony = new Colony(instance, 10, 0.9, 1, 1);
 
-	// Solution sol = colony->run();
+	const clock_t begin_time_colony = clock();
 	
-	// cout << "Resultado: " << sol.getValue() << endl;
-
-	InstanceUtils::generate(10, 5, correlation::WEAK, true);
+	Solution sol = colony->run();
+	
+	cout << "\n\tResultado da colonia de antas:\n" << sol << "\t = " << sol.getValue() << endl;
+	
+	cout << "Tempo de execução (Seg): " << float( clock () - begin_time_colony ) /  CLOCKS_PER_SEC << endl;
+	
+	// InstanceUtils::generate(10, 5, correlation::WEAK, true);
 /*
 //	std::vector<int> capacities { 10, 21, 52, 33 };
 //	std::vector<int> capacities { 10, 21, 52, 33, 5 };
