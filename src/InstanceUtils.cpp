@@ -46,8 +46,8 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 	// TODO Check this implementation
 	if (correlated == c::NONE) {
 
-//		uid distribution(MIN, MAX);
-		uid distribution(1, MAX);
+		uid distribution(MIN, MAX);
+//		uid distribution(1, MAX);
 
 		for (int i = 0; i < nItems; i++) {
 
@@ -59,8 +59,8 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 		}
 	} else if (correlated == c::WEAK) {
 
-//		uid distribution(MIN, MAX);
-		uid distribution(1, MAX);
+		uid distribution(MIN, MAX);
+//		uid distribution(1, MAX);
 
 		for (int i = 0; i < nItems; i++) {
 			// Knapsack Problems - page 185
@@ -72,8 +72,8 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 		}
 	} else if (correlated == c::STRONG) {
 
-//		uid distribution(MIN, MAX);
-		uid distribution(1, MAX);
+		uid distribution(MIN, MAX);
+//		uid distribution(1, MAX);
 
 		for (int i = 0; i < nItems; i++) {
 			// Knapsack Problems - page 186
