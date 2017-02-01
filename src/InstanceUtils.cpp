@@ -102,24 +102,17 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 				ck += capacities[k];
 			}
 			
-			
-			// TUDO VERIFICAR O C DO "C"ARALHO
-			// Acho que 
+			// Acho que ...
 			uid distribution(MIN, std::max((int)(MIN + wj - ck), MIN));
 
 			int c = distribution(generator);
 
-			if ((MIN + wj - ck) < MIN) {
-				// std::cout << "MIN: " << MIN << "\tMIN do carallho: " << MIN + wj - ck << "\tc: " << c << std::endl;
-				std::cout << "MIN: " << MIN << "\tMIN do carallho: " << MIN + wj - ck << "\tc: " << c << "\twj: " << wj << "\tck: " << ck << std::endl;
-			}
 			capacities.push_back(c);
 			if ((lastCapacity - c) < MIN)
 				std::cout << "Ia dar merda" << std::endl;
 			// Aqui estava dando problema na última capacidade. Pois a última capacidade é que é a atribuída ao usuário, quando o c é grande, dá problema.
 			lastCapacity = ((lastCapacity - c) < MIN) ? MIN : lastCapacity - c;
 		}
-		std::cout << "last: " << lastCapacity << std::endl;
 		capacities.push_back(lastCapacity);
 
 	} else {
