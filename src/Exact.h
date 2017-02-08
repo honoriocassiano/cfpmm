@@ -11,7 +11,7 @@ public:
 	Exact(const Instance* instance);
 	virtual ~Exact();
 
-	Solution solve() const;
+	Solution solve(std::size_t threads = 1) const;
 
 	const Instance* getInstance() const {
 		return instance;
@@ -19,6 +19,10 @@ public:
 
 private:
 	const Instance* instance;
+
+	static void* parallelSolve(void * param);
+
+	typedef struct _thread_arg thread_arg;
 };
 }
 
