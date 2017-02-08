@@ -13,8 +13,11 @@ public:
 
 	Solution solve() const;
 
-private:
+	const Instance* getInstance() const {
+		return instance;
+	}
 
+private:
 	const Instance* instance;
 };
 }
