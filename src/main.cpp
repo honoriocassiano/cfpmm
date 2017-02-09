@@ -121,7 +121,7 @@ int main(void) {
 	file
 			<< "nItens,nKnapsacks,ExactTime,ColonyTime,ExactResult,ColonyResult,iterations\n";
 
-	for (int i = 1; i < 10; ++i) {
+	for (int i = 1; i < 11; ++i) {
 
 		file.flush();
 		auto instance = InstanceUtils::readFromFile(
@@ -153,7 +153,7 @@ int main(void) {
 	// ===============================================================
 
 	// =========== EXECUTA TESTE EXATO DAS 10 INSTÂNCIAS =============
-
+/*
 	std::ofstream file("../results/exact_results.csv");
 
 	if (!file.is_open()) {
@@ -164,7 +164,7 @@ int main(void) {
 	file
 			<< "nItens,nKnapsacks,ExactTime,ExactResult\n";
 
-	for (int i = 1; i < 10; ++i) {
+	for (int i = 1; i < 11; ++i) {
 
 		file.flush();
 		auto instance = InstanceUtils::readFromFile(
@@ -179,9 +179,86 @@ int main(void) {
 
 		float time_exact = (float(clock() - begin_time_exact) / CLOCKS_PER_SEC) / concurentThreadsUsed;
 
-		file << (i * 2) << "," << i << "," << time_exact
+		file << 10 << "," << i << "," << time_exact
 				<< "," << solutionExact.getValue() << "\n";
+		file.close();
 	}
+*/
 	// ===============================================================
+
+
+	// ======= EXECUTA META-HEURISTICOS DAS 10 INSTÂNCIAS =============
+/*
+	std::ofstream file("../results/heuristic_results.csv");
+
+	if (!file.is_open()) {
+		std::cerr << "Error opening file\n";
+		return false;
+	}
+
+	file
+			<< "nItens,nKnapsacks,ColonyTime,ColonyResult,iterations\n";
+
+	for (int i = 1; i < 11; ++i) {
+
+		file.flush();
+		auto instance = InstanceUtils::readFromFile(
+				"../instances/instance" + std::to_string(i) + ".txt");
+
+		unsigned concurentThreadsUsed = std::thread::hardware_concurrency();
+
+
+		Colony* colony = new Colony(instance, 10, 0.9, 1, 1);
+
+		const clock_t begin_time_colony = clock();
+
+		auto solutionColony = colony->run();
+
+		float time_colony = float(clock() - begin_time_colony) / CLOCKS_PER_SEC;
+
+		file << 10 << "," << i << "," << time_colony << "," << 
+			std::get<0>(solutionColony).getValue() << "," << std::get<1>(solutionColony) << "\n";
+
+	}
+*/
+	// ===============================================================
+
+
+	// ======= EXECUTA META-HEURISTICOS DAS INSTÂNCIAS > 10 ==========
+
+	std::ofstream file("../results/heuristic_results_after10.csv");
+
+	if (!file.is_open()) {
+		std::cerr << "Error opening file\n";
+		return false;
+	}
+
+	file
+			<< "nItens,nKnapsacks,ColonyTime,ColonyResult,iterations\n";
+
+	for (int i = 11; i < 11; ++i) {
+
+		file.flush();
+		auto instance = InstanceUtils::readFromFile(
+				"../instances/instance" + std::to_string(i) + ".txt");
+
+		unsigned concurentThreadsUsed = std::thread::hardware_concurrency();
+
+
+		Colony* colony = new Colony(instance, 10, 0.9, 1, 1);
+
+		const clock_t begin_time_colony = clock();
+
+		auto solutionColony = colony->run();
+
+		float time_colony = float(clock() - begin_time_colony) / CLOCKS_PER_SEC;
+
+		file << 10 << "," << i << "," << time_colony << "," << 
+			std::get<0>(solutionColony).getValue() << "," << std::get<1>(solutionColony) << "\n";
+
+	}
+
+	// ===============================================================
+	file.close();
 	return 0;
 }
