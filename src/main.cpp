@@ -11,6 +11,7 @@
 #include <vector>
 #include <cstdlib>
 #include <pthread.h>
+#include <thread>
 
 #include "Debug.h"
 #include "Colony.h"
@@ -46,24 +47,30 @@ int main(void) {
 
 	std::vector<int> capacities { 1499, 78, 336, 492, 35 };
 
-	std::vector<Item> items { Item(487, 456), Item(269, 209), Item(542, 638),
-			Item(169, 70), Item(543, 518), Item(859, 956), Item(916, 889), Item(
+	std::vector<Item> items { Item(487, 456), Item(269, 209), Item(542, 638), Item(542, 638), 
+			Item(169, 70), Item(543, 518), Item(859, 956), Item(859, 956), Item(859, 956), Item(
 					878, 828) };
 
 	Instance* instance = new Instance(items.size(), capacities.size(), items,
 			capacities);
 
-	//	const clock_t begin_time_exact = clock();
+	const size_t _threads = 4;
+	
+	unsigned concurentThreadsSupported = std::thread::hardware_concurrency();
+	unsigned concurentThreadsUsed = _threads > concurentThreadsSupported ? 
+			concurentThreadsSupported : _threads;
+
+	std::cout << "Processadores disponíveis: " << concurentThreadsSupported << std::endl;
+	std::cout << "Threads instanciadas: " << _threads << std::endl;
 
 	auto exact = Exact(instance);
 
 	const clock_t begin_time_exact = clock();
 
-//	auto solution = exact.solve(4);
-	auto solution = exact.solve(20);
+	auto solution = exact.solve(_threads);
 
 	std::cout << "Tempo de execução (Seg): "
-			<< float(clock() - begin_time_exact) / CLOCKS_PER_SEC << std::endl;
+			<< (float(clock() - begin_time_exact) / CLOCKS_PER_SEC) / concurentThreadsUsed << std::endl;
 
 	std::cout << "\n\tResultado exato: \n" << solution << "\t = "
 			<< solution.getValue() << "\n";
