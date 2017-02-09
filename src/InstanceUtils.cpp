@@ -14,6 +14,7 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <string>
 
 namespace cfpmm {
 
@@ -27,7 +28,7 @@ InstanceUtils::~InstanceUtils() {
 
 }
 
-Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
+Instance* InstanceUtils::generate(int index, std::size_t nItems, std::size_t nKnapsacks,
 		correlation correlated, bool similar, bool save) {
 
 #define RAND(MIN, MAX, GEN) (uniform_int_distribution<int>(MIN, MAX)(GEN))
@@ -133,7 +134,7 @@ Instance* InstanceUtils::generate(std::size_t nItems, std::size_t nKnapsacks,
 	}
 
 	if (save) {
-		saveToFile("instance.txt", nItems, nKnapsacks, capacities, items);
+		saveToFile("../instances/instance" + std::to_string(index) + ".txt", nItems, nKnapsacks, capacities, items);
 	}
 
 #undef RAND

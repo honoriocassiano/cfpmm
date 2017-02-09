@@ -44,7 +44,7 @@ public:
 	 *
 	 * @return New instance of problem
 	 */
-	static Instance* generate(std::size_t nItems, std::size_t nKnapsacks,
+	static Instance* generate(int index, std::size_t nItems, std::size_t nKnapsacks,
 			correlation correlated, bool similar, bool save = true);
 
 	/**
