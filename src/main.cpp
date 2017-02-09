@@ -151,5 +151,37 @@ int main(void) {
 	}
 */
 	// ===============================================================
+
+	// =========== EXECUTA TESTE EXATO DAS 10 INSTÂNCIAS =============
+
+	std::ofstream file("../results/exact_results.csv");
+
+	if (!file.is_open()) {
+		std::cerr << "Error opening file\n";
+		return false;
+	}
+
+	file
+			<< "nItens,nKnapsacks,ExactTime,ExactResult\n";
+
+	for (int i = 1; i < 10; ++i) {
+
+		file.flush();
+		auto instance = InstanceUtils::readFromFile(
+				"../instances/instance" + std::to_string(i) + ".txt");
+
+		unsigned concurentThreadsUsed = std::thread::hardware_concurrency();
+
+		const clock_t begin_time_exact = clock();
+
+		auto exact = Exact(instance);
+		auto solutionExact = exact.solve(concurentThreadsUsed);
+
+		float time_exact = (float(clock() - begin_time_exact) / CLOCKS_PER_SEC) / concurentThreadsUsed;
+
+		file << (i * 2) << "," << i << "," << time_exact
+				<< "," << solutionExact.getValue() << "\n";
+	}
+	// ===============================================================
 	return 0;
 }
