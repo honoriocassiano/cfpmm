@@ -208,7 +208,7 @@ int main(void) {
 		unsigned concurentThreadsUsed = std::thread::hardware_concurrency();
 
 
-		Colony* colony = new Colony(instance, 10, 0.9, 1, 1);
+		Colony* colony = new Colony(instance, 5, 0.9, 1, 1);
 
 		const clock_t begin_time_colony = clock();
 
@@ -225,7 +225,7 @@ int main(void) {
 
 
 	// ======= EXECUTA META-HEURISTICOS DAS INSTÂNCIAS > 10 ==========
-
+/*
 	std::ofstream file("../results/heuristic_results_after10.csv");
 
 	if (!file.is_open()) {
@@ -257,8 +257,67 @@ int main(void) {
 			std::get<0>(solutionColony).getValue() << "," << std::get<1>(solutionColony) << "\n";
 
 	}
-
+*/
 	// ===============================================================
+	// file.close();
+/*
+	std::ofstream file("../results/exact_results_sparcity2.csv");
+
+	if (!file.is_open()) {
+		std::cerr << "Error opening file\n";
+		return false;
+	}
+
+	file << "nItens,nKnapsacks,ExactTime,ExactResult\n";
+
+
+	file.flush();
+	
+	auto instance = InstanceUtils::readFromFile(
+				"../instances/instance800.txt");
+
+	unsigned concurentThreadsUsed = 1; //std::thread::hardware_concurrency();
+
+	const clock_t begin_time_exact = clock();
+
+	auto exact = Exact(instance);
+	auto solutionExact = exact.solve(concurentThreadsUsed);
+
+	float time_exact = (float(clock() - begin_time_exact) / CLOCKS_PER_SEC) / concurentThreadsUsed;
+
+	file << 3 << "," << 80 << "," << time_exact
+				<< "," << solutionExact.getValue() << "\n";
 	file.close();
+*/
+/*
+	std::ofstream file("../results/heuristic_results_sparcity800.csv");
+
+	if (!file.is_open()) {
+		std::cerr << "Error opening file\n";
+		return false;
+	}
+
+	file
+			<< "nItens,nKnapsacks,ColonyTime,ColonyResult,iterations\n";
+
+
+	file.flush();
+	auto instance = InstanceUtils::readFromFile(
+			"../instances/instance800.txt");
+
+	unsigned concurentThreadsUsed = std::thread::hardware_concurrency();
+
+
+	Colony* colony = new Colony(instance, 1, 0.9, 1, 1);
+
+	const clock_t begin_time_colony = clock();
+
+	auto solutionColony = colony->run();
+
+	float time_colony = float(clock() - begin_time_colony) / CLOCKS_PER_SEC;
+
+	file << 3 << "," << 80 << "," << time_colony << "," << 
+		std::get<0>(solutionColony).getValue() << "," << std::get<1>(solutionColony) << "\n";
+*/
 	return 0;
 }
