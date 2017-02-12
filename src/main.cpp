@@ -236,7 +236,7 @@ int main(void) {
 	file
 			<< "nItens,nKnapsacks,ColonyTime,ColonyResult,iterations\n";
 
-	for (int i = 11; i < 11; ++i) {
+	for (int i = 11; i < 52; i = i + 10) {
 
 		file.flush();
 		auto instance = InstanceUtils::readFromFile(
@@ -253,7 +253,7 @@ int main(void) {
 
 		float time_colony = float(clock() - begin_time_colony) / CLOCKS_PER_SEC;
 
-		file << 10 << "," << i << "," << time_colony << "," << 
+		file << (i - 1) * 2 << "," << i - 1 << "," << time_colony << "," << 
 			std::get<0>(solutionColony).getValue() << "," << std::get<1>(solutionColony) << "\n";
 
 	}
