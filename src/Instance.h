@@ -27,8 +27,8 @@ public:
 	 * @param items List of items
 	 * @param capacities List of knapsacks
 	 */
-	Instance(std::size_t nItems, std::size_t nKnapsacks,
-			const std::vector<Item>& items, const std::vector<int>& capacities);
+	Instance(const std::vector<Item>& items,
+			const std::vector<int>& capacities);
 
 	virtual ~Instance();
 

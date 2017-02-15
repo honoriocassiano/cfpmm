@@ -137,7 +137,7 @@ Instance* InstanceUtils::generate(int index, std::size_t nItems, std::size_t nKn
 
 #undef RAND
 
-	return new Instance(nItems, nKnapsacks, items, capacities);
+	return new Instance(items, capacities);
 }
 
 bool InstanceUtils::saveToFile(const string& filename, size_t nItems,
@@ -258,7 +258,7 @@ Instance* InstanceUtils::readFromFile(const std::string& filename) {
 
 	fclose(file);
 
-	return new Instance(nItems, nKnapsacks, items, capacities);
+	return new Instance(items, capacities);
 }
 
 } /* namespace cfpmm */

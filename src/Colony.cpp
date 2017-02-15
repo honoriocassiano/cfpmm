@@ -21,8 +21,9 @@ namespace cfpmm {
 
 Colony::Colony(const Instance* _instance, std::size_t _nAnts,
 		float _evaporationRatio, double _alpha, double _beta, std::size_t _mbi) :
-		instance(_instance), nAnts(_nAnts), maxBrazilianIterations(_mbi), ants(_nAnts, nullptr), evaporationRatio(
-				_evaporationRatio), alpha(_alpha), beta(_beta) {
+		instance(_instance), nAnts(_nAnts), maxBrazilianIterations(_mbi), ants(
+				_nAnts, nullptr), evaporationRatio(_evaporationRatio), alpha(
+				_alpha), beta(_beta) {
 
 	if (evaporationRatio >= 1 || evaporationRatio <= 0) {
 		std::cerr
@@ -87,7 +88,7 @@ std::tuple<Solution, int> Colony::run() {
 			}
 		}
 
-		if(!updated) {
+		if (!updated) {
 			++brazilian_iterations;
 		} else {
 			brazilian_iterations = 0;
