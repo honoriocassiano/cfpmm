@@ -25,9 +25,9 @@
 namespace cfpmm {
 
 struct _thread_arg {
-	const Exact * exact;
-	long long unsigned start;
-	long long unsigned end;
+	const Exact * exact; /**< Instance of exact algorithm */
+	long long unsigned start; /**< First possibility to check */
+	long long unsigned end; /**< Last possibility to check */
 };
 
 Exact::Exact(const Instance* _instance) :

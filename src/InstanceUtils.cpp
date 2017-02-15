@@ -110,8 +110,6 @@ Instance* InstanceUtils::generate(int index, std::size_t nItems, std::size_t nKn
 
 			capacities.push_back(c);
 			if ((lastCapacity - c) < MIN)
-				std::cout << "Ia dar merda" << std::endl;
-			// Aqui estava dando problema na última capacidade. Pois a última capacidade é que é a atribuída ao usuário, quando o c é grande, dá problema.
 			lastCapacity = ((lastCapacity - c) < MIN) ? MIN : lastCapacity - c;
 		}
 		capacities.push_back(lastCapacity);
