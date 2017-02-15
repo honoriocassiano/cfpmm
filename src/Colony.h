@@ -17,7 +17,7 @@
 namespace cfpmm {
 
 /**
- * Class that represent colony of ants
+ * Class that represent colony of ants.
  */
 class Colony {
 public:
@@ -25,22 +25,23 @@ public:
 	 * @param instance Instance of problem
 	 * @param nAnts Number of ants
 	 * @param evaporationRatio Evaporation ratio
-	 * @param alpha Alpha value
-	 * @param beta Beta value
+	 * @param alpha Value of alpha
+	 * @param beta Value of beta
+	 * @param mbi Number of iterations without improvement
 	 */
 	Colony(const Instance* instance, std::size_t nAnts, float evaporationRatio,
-			double alpha, double beta);
+			double alpha, double beta, std::size_t mbi = 50);
 	virtual ~Colony();
 
 	/**
-	 * @return Matrix of pheromones
+	 * @return Matrix of pheromones.
 	 */
 	const std::vector<std::vector<double>>& getPheromoneList() const {
 		return pheromoneList;
 	}
 
 	/**
-	 * @return List of Ants
+	 * @return List of Ants.
 	 */
 	const std::vector<Ant*>& getAnts() const {
 		return ants;
@@ -49,7 +50,7 @@ public:
 	/**
 	 * Run algorithm.
 	 *
-	 * @return Tuple containing final Solution and number of iterations
+	 * @return Tuple containing final Solution and number of iterations spent.
 	 */
 	std::tuple<Solution, int> run();
 
@@ -81,6 +82,11 @@ private:
 	 * Number of ants.
 	 */
 	std::size_t nAnts;
+
+	/**
+	 * Number of iterations without improvement.
+	 */
+	std::size_t maxBrazilianIterations;
 
 	/**
 	 * Instance of problem.

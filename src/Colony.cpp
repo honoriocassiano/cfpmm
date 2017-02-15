@@ -17,13 +17,11 @@
 #include "Debug.h"
 #include "Utils.h"
 
-#define MAX_BRAZILIAN_ITERATION (50)
-
 namespace cfpmm {
 
 Colony::Colony(const Instance* _instance, std::size_t _nAnts,
-		float _evaporationRatio, double _alpha, double _beta) :
-		instance(_instance), nAnts(_nAnts), ants(_nAnts, nullptr), evaporationRatio(
+		float _evaporationRatio, double _alpha, double _beta, std::size_t _mbi) :
+		instance(_instance), nAnts(_nAnts), maxBrazilianIterations(_mbi), ants(_nAnts, nullptr), evaporationRatio(
 				_evaporationRatio), alpha(_alpha), beta(_beta) {
 
 	if (evaporationRatio >= 1 || evaporationRatio <= 0) {
@@ -73,7 +71,7 @@ std::tuple<Solution, int> Colony::run() {
 	int brazilian_iterations = 0;
 	int iterations = 0;
 
-	while (brazilian_iterations < MAX_BRAZILIAN_ITERATION) {
+	while (brazilian_iterations < maxBrazilianIterations) {
 
 		iterateOverAnts();
 
