@@ -1,0 +1,14 @@
+Fumei!
+
+As instâncias com sufixo de 1 a 10 devem ser testadas para o algoritmo exato e a meta-heuristica.
+
+As demais instâncias devem ser executadas apenas pela meta-heuristica.
+
+============================================================================================================================
+
+Aumentar o número de mochilas aumenta o espaço de busca, contudo, aumenta a probabilidade de se encontrar resultados ótimos 
+ou próximos do ótimo.
+
+Aumentar o número de itens aumenta o espaço de busca e dificulta a obtenção do resultado ótimo ou próximos do ótimo.
+
+Além disso a proporção do aumento do espaço de busca é exponencialmente maior quando se aumenta o número de itens.

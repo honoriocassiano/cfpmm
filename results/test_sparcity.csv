@@ -1,0 +1,3 @@
+instance,nItens,nKnapsacks,ExactTime,ExactResult,ColonyMeanTime,worse,best,mean,percent
+A,12,2,1.49818,2189,0.004092,1763,2189,2038.1,40
+B,3,80,0.832769,899,0.014738,899,899,899,100
